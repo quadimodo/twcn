@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	xmlns:tx="http://www.springframework.org/schema/tx">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/twcn"></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+			<value>com.quadi.entity.Directmsgs</value>
+			<value>com.quadi.entity.Forwards</value>
+			<value>com.quadi.entity.Likes</value>
+			<value>com.quadi.entity.Mentions</value>
+			<value>com.quadi.entity.Pics</value>
+			<value>com.quadi.entity.Relationships</value>
+			<value>com.quadi.entity.Replays</value>
+			<value>com.quadi.entity.T2p</value>
+			<value>com.quadi.entity.T2t</value>
+			<value>com.quadi.entity.Topics</value>
+			<value>com.quadi.entity.Tweets</value>
+			<value>com.quadi.entity.Users</value>
+			<value>com.quadi.entity.Videos</value>
+				</list>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+	<bean id="T2pDAO" class="com.quadi.dao.T2pDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MentionsDAO" class="com.quadi.dao.MentionsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- user 开始 -->
+	<bean id="UsersDAO" class="com.quadi.dao.UsersDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserService" class="com.quadi.service.UserService">
+		<property name="usersDAO" ><ref bean="UsersDAO"/>
+		</property>
+	</bean>
+	<bean id="UsersAction" class="com.quadi.action.UsersAction">
+		<property name="userService"><ref bean="UserService"/></property>
+		<!-- <property name="utilBean" ><ref bean="UtilBean" /></property> -->
+		
+	</bean>
+	<!-- user 结束-->
+	<bean id="VideosDAO" class="com.quadi.dao.VideosDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TweetsDAO" class="com.quadi.dao.TweetsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LikesDAO" class="com.quadi.dao.LikesDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="PicsDAO" class="com.quadi.dao.PicsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ReplaysDAO" class="com.quadi.dao.ReplaysDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RelationshipsDAO"
+		class="com.quadi.dao.RelationshipsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DirectmsgsDAO" class="com.quadi.dao.DirectmsgsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ForwardsDAO" class="com.quadi.dao.ForwardsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TopicsDAO" class="com.quadi.dao.TopicsDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="T2tDAO" class="com.quadi.dao.T2tDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UtilBean" class="com.quadi.util.UtilBean">
+	</bean>
+	</beans>
