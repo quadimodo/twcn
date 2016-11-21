@@ -35,7 +35,9 @@
 			$("#login").validationEngine(
 					'detach');
 		});
-		
+		$("#signin-email").focus(function(){
+			
+		});
 		$('#login')
 				.validationEngine(
 						'attach',
