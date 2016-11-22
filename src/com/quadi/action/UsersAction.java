@@ -3,8 +3,12 @@ package com.quadi.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpRequest;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.quadi.entity.Relationships;
@@ -60,10 +64,12 @@ public class UsersAction {
 	public String  login(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		userService=context.getBean("UserService", UserService.class);
+		HttpServletRequest request=ServletActionContext.getRequest();
 		Users newuser=userService.findByUsername_pwd(users.getUsername(), users.getPassword());
 		if(newuser!=null){
 			msg="µÇÂ¼³É¹¦";
 			users=newuser;
+			request.getSession().setAttribute("users", users);
 			System.out.println(users.getUid());
 			//ActionContext.getContext().put("msg", msg);
 			return "home";
@@ -94,6 +100,8 @@ public class UsersAction {
 	public String homepage(){
 		Map<String, Object> maplist=commonService();
 		//userService=(UserService) maplist.get("userService");
+		HttpServletRequest request=ServletActionContext.getRequest();
+		users=(Users) request.getSession().getAttribute("users");
 		relationshipsService=(RelationshipsService) maplist.get("relationshipsService");
 		relationshipsService.setUsers(users);
 		long i=relationshipsService.findByHuid();
