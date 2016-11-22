@@ -5,6 +5,11 @@
 	<package name="default" extends="struts-default">
 		<action name="usersAction" class="com.quadi.action.UsersAction" method="login">
 			<result name="login">/index.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<action name="signupAction" class="com.quadi.action.UsersAction" method="signup">
+			<result name="login">/index.jsp</result>
+			<result name="error">/login.jsp</result>
 		</action>
 	</package>
 </struts>    

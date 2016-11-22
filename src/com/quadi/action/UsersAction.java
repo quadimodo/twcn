@@ -43,13 +43,31 @@ public class UsersAction {
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		userService=context.getBean("UserService", UserService.class);
 		boolean i=userService.findByUsername_pwd(users.getUsername(), users.getPassword());
-		System.out.println(i);
+		System.out.println("userService.findByUsername_pwd="+i);
 		if(i){
 			msg="登录成功";
+			ActionContext.getContext().put("msg", msg);
+			return "login";
 		}else{
 			msg="账号或密码错误";
+			ActionContext.getContext().put("msg", msg);
+			return "error";
 		}		
-		ActionContext.getContext().put("msg", msg);
-		return "login";
+	}
+	//注册
+	public String signup(){
+		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+		userService=context.getBean("UserService", UserService.class);
+		boolean i=userService.findByUsername_email(users);
+		System.out.println("userService.findByUsername_email="+i);
+		if(i){
+			msg="注册成功";
+			ActionContext.getContext().put("msg", msg);
+			return "login";
+		}else{
+			msg="用户名或邮箱已存在";
+			ActionContext.getContext().put("msg", msg);
+			return "error";
+		}
 	}
 }

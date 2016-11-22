@@ -1,5 +1,9 @@
 package com.quadi.service;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
+
 import com.quadi.dao.UsersDAO;
 import com.quadi.entity.Users;
 
@@ -31,4 +35,17 @@ public class UserService {
 			 return false;			
 		 }
 }
+	//×¢²á£¬ÏÈÅĞ¶ÏÊÇ·ñ´æÔÚ£¬ÔÙ×¢²á
+	public boolean findByUsername_email(Users user){
+		users=usersDAO.findByUsername_email(user);
+		if(users==null){
+			user.setNickname(user.getUsername());
+			user.setRegisttime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+			usersDAO.save(user);
+			return true;
+		}else{
+			return false;			
+		}
+		
+	}
 }

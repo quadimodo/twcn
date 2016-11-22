@@ -80,7 +80,14 @@ public class RelationshipsDAO {
 			throw re;
 		}
 	}
-
+	//查询关注人数
+	public int findByHuid(){
+		String hql="select count(*) from relationships ";
+		
+		return 0;
+	}
+	
+	
 	public List<Relationships> findByExample(Relationships instance) {
 		log.debug("finding Relationships instance by example");
 		try {

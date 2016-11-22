@@ -94,6 +94,19 @@ public class UsersDAO {
 		Users users=(Users) sessionFactory.openSession().createQuery(hql).setString("username",username ).setString("password", pwd).uniqueResult();
 		return users;
 	}
+	//判断username和email是否存在
+	public Users findByUsername_email(Users user){
+		String hql="from Users a where a.username=:username or a.email=:email";
+		Users users=(Users) sessionFactory.openSession().createQuery(hql).setString("username",user.getUsername() ).setString("email", user.getEmail()).uniqueResult();
+		return users;
+	}
+/*	//查询正在关注的人（根据huid查询users）
+	public List<?> findByHuid(Users users){
+		String hql="from Users a where a.";
+		
+		return null;
+	}*/
+	
 	public List<Users> findByExample(Users instance) {
 		log.debug("finding Users instance by example");
 		try {
