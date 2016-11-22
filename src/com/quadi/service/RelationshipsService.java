@@ -20,8 +20,10 @@ public class RelationshipsService {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
-	public List<?> findByHuid(){
-		
-		return null;
+	// ¹Ø×¢ÈËÊý
+	public long findByHuid(){
+		System.out.println(users);
+		long i=relationshipsDAO.findByHuid(users);
+		return i;
 	}
 }

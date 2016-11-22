@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.quadi.entity.Relationships;
+import com.quadi.entity.Users;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -81,10 +82,10 @@ public class RelationshipsDAO {
 		}
 	}
 	//查询关注人数
-	public int findByHuid(){
-		String hql="select count(*) from relationships ";
-		
-		return 0;
+	public long findByHuid(Users user){
+		String hql="select count(*) from Relationships a where a.usersByHuid.uid=:uid";
+		long i=(Long) sessionFactory.openSession().createQuery(hql).setInteger("uid", user.getUid()).uniqueResult();
+		return i;
 	}
 	
 	

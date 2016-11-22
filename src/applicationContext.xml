@@ -21,24 +21,25 @@
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 			</props>
 		</property>
 		<property name="annotatedClasses">
 			<list>
-			<value>com.quadi.entity.Directmsgs</value>
-			<value>com.quadi.entity.Forwards</value>
-			<value>com.quadi.entity.Likes</value>
-			<value>com.quadi.entity.Mentions</value>
-			<value>com.quadi.entity.Pics</value>
-			<value>com.quadi.entity.Relationships</value>
-			<value>com.quadi.entity.Replays</value>
-			<value>com.quadi.entity.T2p</value>
-			<value>com.quadi.entity.T2t</value>
-			<value>com.quadi.entity.Topics</value>
-			<value>com.quadi.entity.Tweets</value>
-			<value>com.quadi.entity.Users</value>
-			<value>com.quadi.entity.Videos</value>
-				</list>
+				<value>com.quadi.entity.Directmsgs</value>
+				<value>com.quadi.entity.Forwards</value>
+				<value>com.quadi.entity.Likes</value>
+				<value>com.quadi.entity.Mentions</value>
+				<value>com.quadi.entity.Pics</value>
+				<value>com.quadi.entity.Relationships</value>
+				<value>com.quadi.entity.Replays</value>
+				<value>com.quadi.entity.T2p</value>
+				<value>com.quadi.entity.T2t</value>
+				<value>com.quadi.entity.Topics</value>
+				<value>com.quadi.entity.Tweets</value>
+				<value>com.quadi.entity.Users</value>
+				<value>com.quadi.entity.Videos</value>
+			</list>
 		</property>
 	</bean>
 	<bean id="transactionManager"
@@ -59,6 +60,8 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	
 	<!-- user 开始 -->
 	<bean id="UsersDAO" class="com.quadi.dao.UsersDAO">
 		<property name="sessionFactory">
@@ -66,15 +69,23 @@
 		</property>
 	</bean>
 	<bean id="UserService" class="com.quadi.service.UserService">
-		<property name="usersDAO" ><ref bean="UsersDAO"/>
+		<property name="usersDAO">
+			<ref bean="UsersDAO" />
 		</property>
 	</bean>
 	<bean id="UsersAction" class="com.quadi.action.UsersAction">
-		<property name="userService"><ref bean="UserService"/></property>
+		<property name="userService">
+			<ref bean="UserService" />
+		</property>
+		<property name="relationshipsService">
+			<ref bean="RelationshipsService" />
+		</property>
 		<!-- <property name="utilBean" ><ref bean="UtilBean" /></property> -->
-		
+
 	</bean>
-	<!-- user 结束-->
+	<!-- user 结束 -->
+	
+	
 	<bean id="VideosDAO" class="com.quadi.dao.VideosDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -100,12 +111,27 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="RelationshipsDAO"
-		class="com.quadi.dao.RelationshipsDAO">
+	
+	
+	<!-- Relationships 开始 -->
+	<bean id="RelationshipsDAO" class="com.quadi.dao.RelationshipsDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="RelationshipsService" class="com.quadi.service.RelationshipsService">
+		<property name="relationshipsDAO">
+			<ref bean="RelationshipsDAO" />
+		</property>
+	</bean>
+	<bean id="RelationshipsAction" class="com.quadi.action.RelationshipsAction">
+		<property name="relationshipsService">
+			<ref bean="RelationshipsService" />
+		</property>
+	</bean>
+	<!-- Relationships end -->
+	
+	
 	<bean id="DirectmsgsDAO" class="com.quadi.dao.DirectmsgsDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -128,4 +154,4 @@
 	</bean>
 	<bean id="UtilBean" class="com.quadi.util.UtilBean">
 	</bean>
-	</beans>
+</beans>
