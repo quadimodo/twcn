@@ -60,10 +60,11 @@ public class UsersAction {
 	public String  login(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		userService=context.getBean("UserService", UserService.class);
-		boolean i=userService.findByUsername_pwd(users.getUsername(), users.getPassword());
-		System.out.println("userService.findByUsername_pwd="+i);
-		if(i){
+		Users newuser=userService.findByUsername_pwd(users.getUsername(), users.getPassword());
+		if(newuser!=null){
 			msg="登录成功";
+			users=newuser;
+			System.out.println(users.getUid());
 			//ActionContext.getContext().put("msg", msg);
 			return "home";
 		}else{
@@ -76,10 +77,11 @@ public class UsersAction {
 	public String signup(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		userService=context.getBean("UserService", UserService.class);
-		boolean i=userService.findByUsername_email(users);
-		System.out.println("userService.findByUsername_email="+i);
-		if(i){
+		Users newuser=userService.findByUsername_email(users);
+		System.out.println("userService.findByUsername_email="+newuser);
+		if(newuser!=null){
 			msg="注册成功";
+			users=newuser;
 			//ActionContext.getContext().put("msg", msg);
 			return "home";
 		}else{
@@ -91,13 +93,14 @@ public class UsersAction {
 	//进入到主页面
 	public String homepage(){
 		Map<String, Object> maplist=commonService();
-		userService=(UserService) maplist.get("userService");
+		//userService=(UserService) maplist.get("userService");
 		relationshipsService=(RelationshipsService) maplist.get("relationshipsService");
 		relationshipsService.setUsers(users);
 		long i=relationshipsService.findByHuid();
 		
 		return "login";
 	}
+	
 	public  Map<String, Object> commonService(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		Map<String, Object> maplist=new HashMap<String, Object>();

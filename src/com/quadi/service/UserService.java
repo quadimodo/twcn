@@ -27,24 +27,20 @@ public class UserService {
 		return usersDAO.findById(usersid);
 	}
 	//µÇÂ¼²éÑ¯users
-	public boolean findByUsername_pwd(String username,String pwd){
-		 users=usersDAO.findByUsername_pwd(username, pwd);
-		 if(users!=null){
-			 return true;
-		 }else{
-			 return false;			
-		 }
+	public Users findByUsername_pwd(String username,String pwd){ 
+		return usersDAO.findByUsername_pwd(username, pwd);
 }
 	//×¢²á£¬ÏÈÅĞ¶ÏÊÇ·ñ´æÔÚ£¬ÔÙ×¢²á
-	public boolean findByUsername_email(Users user){
+	public Users findByUsername_email(Users user){
 		users=usersDAO.findByUsername_email(user);
 		if(users==null){
 			user.setNickname(user.getUsername());
 			user.setRegisttime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			usersDAO.save(user);
-			return true;
+			users=usersDAO.findByUsername_email(user);
+			return users;
 		}else{
-			return false;			
+			return null;			
 		}
 		
 	}
