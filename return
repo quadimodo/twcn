@@ -1,0 +1,144 @@
+[1mdiff --git a/WebRoot/WEB-INF/classes/applicationContext.xml b/WebRoot/WEB-INF/classes/applicationContext.xml[m
+[1mindex f17e9a9..48e0880 100644[m
+[1m--- a/WebRoot/WEB-INF/classes/applicationContext.xml[m
+[1m+++ b/WebRoot/WEB-INF/classes/applicationContext.xml[m
+[36m@@ -39,6 +39,8 @@[m
+ 				<value>com.quadi.entity.Tweets</value>[m
+ 				<value>com.quadi.entity.Users</value>[m
+ 				<value>com.quadi.entity.Videos</value>[m
+[32m+[m				[32m<value>com.quadi.util.entity.UtilBean</value>[m
+[32m+[m				[32m<value>com.quadi.util.entity.Twt_RltNumBean</value>[m
+ 			</list>[m
+ 		</property>[m
+ 	</bean>[m
+[36m@@ -152,6 +154,4 @@[m
+ 			<ref bean="sessionFactory" />[m
+ 		</property>[m
+ 	</bean>[m
+[31m-	<bean id="UtilBean" class="com.quadi.util.UtilBean">[m
+[31m-	</bean>[m
+ </beans>[m
+\ No newline at end of file[m
+[1mdiff --git a/WebRoot/WEB-INF/classes/com/quadi/action/UsersAction.class b/WebRoot/WEB-INF/classes/com/quadi/action/UsersAction.class[m
+[1mindex 9306a91..549aea0 100644[m
+Binary files a/WebRoot/WEB-INF/classes/com/quadi/action/UsersAction.class and b/WebRoot/WEB-INF/classes/com/quadi/action/UsersAction.class differ
+[1mdiff --git a/WebRoot/WEB-INF/classes/com/quadi/util/UtilBean.class b/WebRoot/WEB-INF/classes/com/quadi/util/UtilBean.class[m
+[1mdeleted file mode 100644[m
+[1mindex 4ad730d..0000000[m
+Binary files a/WebRoot/WEB-INF/classes/com/quadi/util/UtilBean.class and /dev/null differ
+[1mdiff --git a/WebRoot/index.jsp b/WebRoot/index.jsp[m
+[1mindex 96e8e38..e331572 100644[m
+[1m--- a/WebRoot/index.jsp[m
+[1m+++ b/WebRoot/index.jsp[m
+[36m@@ -155,7 +155,7 @@[m
+ 											<!-- æŸ¥çœ‹å…³æ³¨çš„äººçš„è¯¦æƒ… -->[m
+ 											<span class="ProfileCardStats-statLabel u-block">æ­£åœ¨å…³æ³¨</span>[m
+ 											<!-- å…³æ³¨äººæ•° -->[m
+[31m-											<span class="ProfileCardStats-statValue" data-is-compact="false">16</span>[m
+[32m+[m											[32m<span class="ProfileCardStats-statValue" data-is-compact="false">${twt_RltNumBean.relationNum }</span>[m
+ 										</a>[m
+ 									</li>[m
+ 								</ul>[m
+[1mdiff --git a/src/applicationContext.xml b/src/applicationContext.xml[m
+[1mindex f17e9a9..48e0880 100644[m
+[1m--- a/src/applicationContext.xml[m
+[1m+++ b/src/applicationContext.xml[m
+[36m@@ -39,6 +39,8 @@[m
+ 				<value>com.quadi.entity.Tweets</value>[m
+ 				<value>com.quadi.entity.Users</value>[m
+ 				<value>com.quadi.entity.Videos</value>[m
+[32m+[m				[32m<value>com.quadi.util.entity.UtilBean</value>[m
+[32m+[m				[32m<value>com.quadi.util.entity.Twt_RltNumBean</value>[m
+ 			</list>[m
+ 		</property>[m
+ 	</bean>[m
+[36m@@ -152,6 +154,4 @@[m
+ 			<ref bean="sessionFactory" />[m
+ 		</property>[m
+ 	</bean>[m
+[31m-	<bean id="UtilBean" class="com.quadi.util.UtilBean">[m
+[31m-	</bean>[m
+ </beans>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/com/quadi/action/UsersAction.java b/src/com/quadi/action/UsersAction.java[m
+[1mindex 8de3acf..8cd5c3b 100644[m
+[1m--- a/src/com/quadi/action/UsersAction.java[m
+[1m+++ b/src/com/quadi/action/UsersAction.java[m
+[36m@@ -15,13 +15,21 @@[m [mimport com.quadi.entity.Relationships;[m
+ import com.quadi.entity.Users;[m
+ import com.quadi.service.RelationshipsService;[m
+ import com.quadi.service.UserService;[m
+[31m-import com.quadi.util.UtilBean;[m
+[32m+[m[32mimport com.quadi.util.entity.Twt_RltNumBean;[m
+[32m+[m[32mimport com.quadi.util.entity.UtilBean;[m
+ [m
+ public class UsersAction {[m
+ 	private UserService userService;[m
+ 	private Users users;[m
+ 	private UtilBean utilBean;[m
+ 	private Relationships relationships;[m
+[32m+[m	[32mprivate Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();[m
+[32m+[m	[32mpublic Twt_RltNumBean getTwt_RltNumBean() {[m
+[32m+[m		[32mreturn twt_RltNumBean;[m
+[32m+[m	[32m}[m
+[32m+[m	[32mpublic void setTwt_RltNumBean(Twt_RltNumBean twt_RltNumBean) {[m
+[32m+[m		[32mthis.twt_RltNumBean = twt_RltNumBean;[m
+[32m+[m	[32m}[m
+ 	public Relationships getRelationships() {[m
+ 		return relationships;[m
+ 	}[m
+[36m@@ -83,11 +91,13 @@[m [mpublic class UsersAction {[m
+ 	public String signup(){[m
+ 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");[m
+ 		userService=context.getBean("UserService", UserService.class);[m
+[32m+[m		[32mHttpServletRequest request=ServletActionContext.getRequest();[m
+ 		Users newuser=userService.findByUsername_email(users);[m
+ 		System.out.println("userService.findByUsername_email="+newuser);[m
+ 		if(newuser!=null){[m
+ 			msg="×¢²á³É¹¦";[m
+ 			users=newuser;[m
+[32m+[m			[32mrequest.getSession().setAttribute("users", users);[m
+ 			//ActionContext.getContext().put("msg", msg);[m
+ 			return "home";[m
+ 		}else{[m
+[36m@@ -104,11 +114,13 @@[m [mpublic class UsersAction {[m
+ 		users=(Users) request.getSession().getAttribute("users");[m
+ 		relationshipsService=(RelationshipsService) maplist.get("relationshipsService");[m
+ 		relationshipsService.setUsers(users);[m
+[31m-		long i=relationshipsService.findByHuid();[m
+[32m+[m		[32m//½«¹Ø×¢ÈËÊý·ÅÈë¹¤¾ßÖÐ[m
+[32m+[m		[32m//Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();[m
+[32m+[m		[32mtwt_RltNumBean.setRelationNum(relationshipsService.findByHuid());[m
+ 		[m
+ 		return "login";[m
+ 	}[m
+[31m-	[m
+[32m+[m	[32m//¹«¹²·½·¨£¬Ìá¹©service[m
+ 	public  Map<String, Object> commonService(){[m
+ 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");[m
+ 		Map<String, Object> maplist=new HashMap<String, Object>();[m
+[1mdiff --git a/src/com/quadi/util/UtilBean.java b/src/com/quadi/util/UtilBean.java[m
+[1mdeleted file mode 100644[m
+[1mindex 0dc2cfd..0000000[m
+[1m--- a/src/com/quadi/util/UtilBean.java[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-package com.quadi.util;[m
+[31m-[m
+[31m-public class UtilBean {[m
+[31m-	private String msg;[m
+[31m-[m
+[31m-	public String getMsg() {[m
+[31m-		return msg;[m
+[31m-	}[m
+[31m-[m
+[31m-	public void setMsg(String msg) {[m
+[31m-		this.msg = msg;[m
+[31m-	}[m
+[31m-}[m
+warning: LF will be replaced by CRLF in WebRoot/WEB-INF/classes/applicationContext.xml.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in WebRoot/index.jsp.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in src/applicationContext.xml.
+The file will have its original line endings in your working directory.

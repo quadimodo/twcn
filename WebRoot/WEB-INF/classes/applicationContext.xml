@@ -39,6 +39,8 @@
 				<value>com.quadi.entity.Tweets</value>
 				<value>com.quadi.entity.Users</value>
 				<value>com.quadi.entity.Videos</value>
+				<value>com.quadi.util.entity.UtilBean</value>
+				<value>com.quadi.util.entity.Twt_RltNumBean</value>
 			</list>
 		</property>
 	</bean>
@@ -151,7 +153,5 @@
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
-	</bean>
-	<bean id="UtilBean" class="com.quadi.util.UtilBean">
 	</bean>
 </beans>

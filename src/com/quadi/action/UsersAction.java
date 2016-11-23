@@ -15,13 +15,21 @@ import com.quadi.entity.Relationships;
 import com.quadi.entity.Users;
 import com.quadi.service.RelationshipsService;
 import com.quadi.service.UserService;
-import com.quadi.util.UtilBean;
+import com.quadi.util.entity.Twt_RltNumBean;
+import com.quadi.util.entity.UtilBean;
 
 public class UsersAction {
 	private UserService userService;
 	private Users users;
 	private UtilBean utilBean;
 	private Relationships relationships;
+	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
+	public Twt_RltNumBean getTwt_RltNumBean() {
+		return twt_RltNumBean;
+	}
+	public void setTwt_RltNumBean(Twt_RltNumBean twt_RltNumBean) {
+		this.twt_RltNumBean = twt_RltNumBean;
+	}
 	public Relationships getRelationships() {
 		return relationships;
 	}
@@ -83,11 +91,13 @@ public class UsersAction {
 	public String signup(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		userService=context.getBean("UserService", UserService.class);
+		HttpServletRequest request=ServletActionContext.getRequest();
 		Users newuser=userService.findByUsername_email(users);
 		System.out.println("userService.findByUsername_email="+newuser);
 		if(newuser!=null){
 			msg="注册成功";
 			users=newuser;
+			request.getSession().setAttribute("users", users);
 			//ActionContext.getContext().put("msg", msg);
 			return "home";
 		}else{
@@ -104,11 +114,13 @@ public class UsersAction {
 		users=(Users) request.getSession().getAttribute("users");
 		relationshipsService=(RelationshipsService) maplist.get("relationshipsService");
 		relationshipsService.setUsers(users);
-		long i=relationshipsService.findByHuid();
+		//将关注人数放入工具中
+		//Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
+		twt_RltNumBean.setRelationNum(relationshipsService.findByHuid());
 		
 		return "login";
 	}
-	
+	//公共方法，提供service
 	public  Map<String, Object> commonService(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		Map<String, Object> maplist=new HashMap<String, Object>();

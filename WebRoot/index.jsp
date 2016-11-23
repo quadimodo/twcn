@@ -155,7 +155,7 @@
 											<!-- 查看关注的人的详情 -->
 											<span class="ProfileCardStats-statLabel u-block">正在关注</span>
 											<!-- 关注人数 -->
-											<span class="ProfileCardStats-statValue" data-is-compact="false">16</span>
+											<span class="ProfileCardStats-statValue" data-is-compact="false">${twt_RltNumBean.relationNum }</span>
 										</a>
 									</li>
 								</ul>

@@ -1,4 +1,4 @@
-package com.quadi.util;
+package com.quadi.util.entity;
 
 public class UtilBean {
 	private String msg;
