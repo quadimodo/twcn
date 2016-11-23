@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.quadi.entity.Tweets;
+import com.quadi.entity.Users;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -47,6 +48,12 @@ public class TweetsDAO {
 		// do nothing
 	}
 
+	//根据用户id查询推特数目
+	public long findByUid(Users user){
+		String hql="select count(*) from Tweets a where a.users.uid=:uid";
+		long i=(Long) sessionFactory.openSession().createQuery(hql).setInteger("uid", user.getUid()).uniqueResult();
+		return i;
+	}
 	public void save(Tweets transientInstance) {
 		log.debug("saving Tweets instance");
 		try {

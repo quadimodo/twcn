@@ -82,6 +82,9 @@
 		<property name="relationshipsService">
 			<ref bean="RelationshipsService" />
 		</property>
+		<property name="tweetsService">
+			<ref bean="TweetsService"/>
+		</property>
 		<!-- <property name="utilBean" ><ref bean="UtilBean" /></property> -->
 
 	</bean>
@@ -93,11 +96,20 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	
 	<bean id="TweetsDAO" class="com.quadi.dao.TweetsDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="TweetsService" class="com.quadi.service.TweetsService">
+		<property name="tweetsDAO">
+			<ref bean="TweetsDAO"/>
+		</property>
+	</bean>
+	
+	
 	<bean id="LikesDAO" class="com.quadi.dao.LikesDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />

@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.quadi.entity.Relationships;
 import com.quadi.entity.Users;
 import com.quadi.service.RelationshipsService;
+import com.quadi.service.TweetsService;
 import com.quadi.service.UserService;
 import com.quadi.util.entity.Twt_RltNumBean;
 import com.quadi.util.entity.UtilBean;
@@ -22,6 +23,13 @@ public class UsersAction {
 	private UserService userService;
 	private Users users;
 	private UtilBean utilBean;
+	private TweetsService tweetsService;
+	public TweetsService getTweetsService() {
+		return tweetsService;
+	}
+	public void setTweetsService(TweetsService tweetsService) {
+		this.tweetsService = tweetsService;
+	}
 	private Relationships relationships;
 	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
 	public Twt_RltNumBean getTwt_RltNumBean() {
@@ -114,10 +122,11 @@ public class UsersAction {
 		users=(Users) request.getSession().getAttribute("users");
 		relationshipsService=(RelationshipsService) maplist.get("relationshipsService");
 		relationshipsService.setUsers(users);
-		//将关注人数放入工具中
-		//Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
+		tweetsService=(TweetsService) maplist.get("tweetsService");
+		//将关注人数和推特数放入工具中
+		twt_RltNumBean.setTweetNum(tweetsService.findByUid(users));
 		twt_RltNumBean.setRelationNum(relationshipsService.findByHuid());
-		
+
 		return "login";
 	}
 	//公共方法，提供service
@@ -128,6 +137,8 @@ public class UsersAction {
 		maplist.put("userService", userService);
 		relationshipsService=context.getBean("RelationshipsService", RelationshipsService.class);
 		maplist.put("relationshipsService", relationshipsService);
+		tweetsService=context.getBean("TweetsService", TweetsService.class);
+		maplist.put("tweetsService",tweetsService);
 		return maplist;
 	}
 }

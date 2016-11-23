@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.quadi.dao.UsersDAO;
+import com.quadi.entity.Tweets;
 import com.quadi.entity.Users;
 
 public class UserService {

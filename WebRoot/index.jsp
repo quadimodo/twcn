@@ -147,7 +147,7 @@
 											<!-- 查看推文详情 -->
 											<span class="ProfileCardStats-statLabel u-block">推文</span>
 											<!-- 发送推特数目 -->
-											<span class="ProfileCardStats-statValue" data-is-compact="false">21</span>
+											<span class="ProfileCardStats-statValue" data-is-compact="false">${twt_RltNumBean.tweetNum }</span>
 										</a>
 									</li>
 									<li class="ProfileCardStats-stat Arrange-sizeFit">

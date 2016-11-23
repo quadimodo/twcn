@@ -1,13 +1,13 @@
 package com.quadi.util.entity;
 
 public class Twt_RltNumBean {
-	private String tweetNum;
+	private long tweetNum;
 	private long relationNum;
-	public String getTweetNum() {
+	public long getTweetNum() {
 		return tweetNum;
 	}
-	public void setTweetNum(String tweetNum) {
-		this.tweetNum = tweetNum;
+	public void setTweetNum(long l) {
+		this.tweetNum = l;
 	}
 	public long getRelationNum() {
 		return relationNum;
@@ -15,7 +15,7 @@ public class Twt_RltNumBean {
 	public void setRelationNum(long relationNum) {
 		this.relationNum = relationNum;
 	}
-	public Twt_RltNumBean(String tweetNum, long relationNum) {
+	public Twt_RltNumBean(long tweetNum, long relationNum) {
 		super();
 		this.tweetNum = tweetNum;
 		this.relationNum = relationNum;
