@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -156,7 +157,7 @@
 											<!-- 查看关注的人的详情 -->
 											<span class="ProfileCardStats-statLabel u-block">正在关注</span>
 											<!-- 关注人数 -->
-											<span class="ProfileCardStats-statValue" data-is-compact="false">${twt_RltNumBean.relationNum }</span>
+											<span class="ProfileCardStats-statValue" data-is-compact="false">${twt_RltNumBean.relationNum-1 }</span>
 										</a>
 									</li>
 								</ul>
@@ -364,6 +365,8 @@
 			<div class="stream">
 				<ol class="stream-items js-navigable-stream" id="stream-items-id">
 
+<!-- --------------------------------------------------------------------------------------------------------------start -->
+					<s:iterator var="list" value="tweetsList">		
 					<li class="js-stream-item stream-item stream-item
 " data-item-id="793256326352822272" id="stream-item-tweet-793256326352822272" data-item-type="tweet">
 
@@ -381,9 +384,9 @@
 
 								<div class="stream-item-header">
 									<a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/NewYorker" data-user-id="14677919">
-										<img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/421413599441981441/GMZ5UIRl_bigger.jpeg" alt="">
-										<strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part="">The New Yorker</strong>
-										<span>‏</span><span class="username js-action-profile-name" data-aria-label-part=""><s>@</s><b>NewYorker</b></span>
+										<img class="avatar js-action-profile-avatar" src="${list.users.avatar }" alt="">
+										<strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part="">${list.users.nickname }</strong>
+										<span>‏</span><span class="username js-action-profile-name" data-aria-label-part=""><s>@</s><b>${list.users.username }</b></span>
 
 									</a>
 
@@ -397,7 +400,7 @@
 								</div>
 
 								<div class="js-tweet-text-container">
-									<p class="TweetTextSize  js-tweet-text tweet-text" lang="en" data-aria-label-part="0">In “The Handmaiden,” Park Chan-wook deftly shows the sense of silly freedom found in enacting a sexual cliché.
+									<p class="TweetTextSize  js-tweet-text tweet-text" lang="en" data-aria-label-part="0">${list.tcontent }
 										<a href="https://t.co/RNwpPXQryB" rel="nofollow" dir="ltr" data-expanded-url="http://nyer.cm/cNl3D5C" class="twitter-timeline-link" target="_blank" title="http://nyer.cm/cNl3D5C"><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">nyer.cm/cNl3D5C</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span>
 										</a>
 										<a href="https://t.co/59VHOqwEQO" class="twitter-timeline-link u-hidden" data-pre-embedded="true" dir="ltr">pic.twitter.com/59VHOqwEQO</a>
@@ -582,6 +585,8 @@
 						</div>
 
 					</li>
+					</s:iterator>
+<!-- --------------------------------------------------------------------------------------------------------------end -->
 
 					<li class="js-stream-item stream-item stream-item
 " data-item-id="793176150415708160" id="stream-item-tweet-793176150415708160" data-item-type="tweet">

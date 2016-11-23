@@ -54,6 +54,12 @@ public class TweetsDAO {
 		long i=(Long) sessionFactory.openSession().createQuery(hql).setInteger("uid", user.getUid()).uniqueResult();
 		return i;
 	}
+	//根据用户id查询关注人的推特
+	public List<?> findTweetByUid(Users user,int currentpage){
+		String hql="from Tweets a where a.users.uid in (select a.rsid from Relationships a where a.usersByHuid=:uid) order by a.tweettime desc";
+		List<?> list=sessionFactory.openSession().createQuery(hql).setInteger("uid", user.getUid()).setFirstResult((currentpage-1)*5).setMaxResults(5).list();
+		return list;
+	}
 	public void save(Tweets transientInstance) {
 		log.debug("saving Tweets instance");
 		try {

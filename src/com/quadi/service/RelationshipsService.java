@@ -3,11 +3,20 @@ package com.quadi.service;
 import java.util.List;
 
 import com.quadi.dao.RelationshipsDAO;
+import com.quadi.entity.Relationships;
 import com.quadi.entity.Users;
 
 public class RelationshipsService {
 	private RelationshipsDAO relationshipsDAO;
 	private Users users;
+	private Relationships relationships =new Relationships();
+	
+	public Relationships getRelationships() {
+		return relationships;
+	}
+	public void setRelationships(Relationships relationships) {
+		this.relationships = relationships;
+	}
 	public RelationshipsDAO getRelationshipsDAO() {
 		return relationshipsDAO;
 	}
@@ -25,5 +34,11 @@ public class RelationshipsService {
 		System.out.println(users);
 		long i=relationshipsDAO.findByHuid(users);
 		return i;
+	}
+	//¹Ø×¢×Ô¼º
+	public void relationMyself(Users users){
+		relationships.setUsersByHuid(users);
+		relationships.setUsersBySuid(users);
+		relationshipsDAO.save(relationships);
 	}
 }

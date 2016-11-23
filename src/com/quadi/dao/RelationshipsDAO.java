@@ -87,6 +87,7 @@ public class RelationshipsDAO {
 		long i=(Long) sessionFactory.openSession().createQuery(hql).setInteger("uid", user.getUid()).uniqueResult();
 		return i;
 	}
+
 	
 	
 	public List<Relationships> findByExample(Relationships instance) {

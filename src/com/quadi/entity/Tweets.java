@@ -81,7 +81,7 @@ public class Tweets implements java.io.Serializable {
 		this.tid = tid;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "uid", nullable = false)
 	public Users getUsers() {
 		return this.users;

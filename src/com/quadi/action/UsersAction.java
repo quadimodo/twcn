@@ -1,6 +1,7 @@
 package com.quadi.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpRequest;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.quadi.entity.Relationships;
+import com.quadi.entity.Tweets;
 import com.quadi.entity.Users;
 import com.quadi.service.RelationshipsService;
 import com.quadi.service.TweetsService;
@@ -21,17 +23,34 @@ import com.quadi.util.entity.UtilBean;
 
 public class UsersAction {
 	private UserService userService;
+	private String msg;
 	private Users users;
 	private UtilBean utilBean;
+	private Tweets tweets;
 	private TweetsService tweetsService;
+	private Relationships relationships;
+	private RelationshipsService relationshipsService;
+	private List<?> tweetsList;
+	
+	public Tweets getTweets() {
+		return tweets;
+	}
+	public void setTweets(Tweets tweets) {
+		this.tweets = tweets;
+	}
+	public List<?> getTweetsList() {
+		return tweetsList;
+	}
+	public void setTweetsList(List<?> tweetsList) {
+		this.tweetsList = tweetsList;
+	}
+	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
 	public TweetsService getTweetsService() {
 		return tweetsService;
 	}
 	public void setTweetsService(TweetsService tweetsService) {
 		this.tweetsService = tweetsService;
 	}
-	private Relationships relationships;
-	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
 	public Twt_RltNumBean getTwt_RltNumBean() {
 		return twt_RltNumBean;
 	}
@@ -44,14 +63,12 @@ public class UsersAction {
 	public void setRelationships(Relationships relationships) {
 		this.relationships = relationships;
 	}
-	private RelationshipsService relationshipsService;
 	public RelationshipsService getRelationshipsService() {
 		return relationshipsService;
 	}
 	public void setRelationshipsService(RelationshipsService relationshipsService) {
 		this.relationshipsService = relationshipsService;
 	}
-	private String msg;
 	public String getMsg() {
 		return msg;
 	}
@@ -101,9 +118,11 @@ public class UsersAction {
 		userService=context.getBean("UserService", UserService.class);
 		HttpServletRequest request=ServletActionContext.getRequest();
 		Users newuser=userService.findByUsername_email(users);
-		System.out.println("userService.findByUsername_email="+newuser);
 		if(newuser!=null){
 			msg="注册成功";
+			//注册成功后，先关注自己
+			relationshipsService=context.getBean("RelationshipsService",RelationshipsService.class);
+			relationshipsService.relationMyself(newuser);
 			users=newuser;
 			request.getSession().setAttribute("users", users);
 			//ActionContext.getContext().put("msg", msg);
@@ -126,7 +145,8 @@ public class UsersAction {
 		//将关注人数和推特数放入工具中
 		twt_RltNumBean.setTweetNum(tweetsService.findByUid(users));
 		twt_RltNumBean.setRelationNum(relationshipsService.findByHuid());
-
+		//返回推特
+		tweetsList=tweetsService.findTweetistByUid(users, 1);
 		return "login";
 	}
 	//公共方法，提供service

@@ -139,6 +139,7 @@
 		<property name="relationshipsDAO">
 			<ref bean="RelationshipsDAO" />
 		</property>
+		
 	</bean>
 	<bean id="RelationshipsAction" class="com.quadi.action.RelationshipsAction">
 		<property name="relationshipsService">
