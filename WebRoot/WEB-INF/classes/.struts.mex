@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Struts2Diagram version="2.0">
-  <package name="default" location="225,10" size="280,420">
-    <action name="usersAction" location="65,176" size="150,83">
+  <package name="default" location="225,10" size="280,490">
+    <action name="usersAction" location="65,71" size="150,83">
       <result name="login">
         <resourceEdge source="login" routing="0" target="index.jsp" />
       </result>
@@ -12,21 +12,24 @@
         <resourceEdge source="error" routing="0" target="login.jsp" />
       </result>
     </action>
-    <action name="signupAction" location="65,327" size="150,62">
+    <action name="signupAction" location="65,351" size="150,83">
       <result name="login">
         <resourceEdge source="login" routing="0" target="index.jsp" />
       </result>
       <result name="error">
         <resourceEdge source="error" routing="0" target="login.jsp" />
       </result>
+      <result name="home">
+        <resourceEdge source="home" routing="0" target="homeAction" namespace="" />
+      </result>
     </action>
-    <action name="homeAction" location="65,57" size="150,41">
+    <action name="homeAction" location="65,232" size="150,41">
       <result name="login">
         <resourceEdge source="login" routing="0" target="index.jsp" />
       </result>
     </action>
   </package>
-  <webResource name="index.jsp" path="/index.jsp" location="570,192" size="150,55" />
-  <webResource name="login.jsp" path="/login.jsp" location="10,332" size="150,55" />
+  <webResource name="index.jsp" path="/index.jsp" location="10,227" size="150,55" />
+  <webResource name="login.jsp" path="/login.jsp" location="570,87" size="150,55" />
 </Struts2Diagram>
 

@@ -67,7 +67,8 @@
 						</div>
 						<ul class="nav right-actions">
 							<li class="me dropdown session js-session" data-global-action="t1me" id="user-dropdown">
-								<a href="/settings/account" class="btn js-tooltip settings dropdown-toggle js-dropdown-toggle" id="user-dropdown-toggle" data-placement="bottom" role="button" aria-haspopup="true" data-original-title="个人资料与账号"><img class="avatar size32" src="https://pbs.twimg.com/profile_images/1152020704/rainser__2__normal.jpg" alt="Profile and settings" data-user-id="116652192"></a>
+							<!-- 个人小头像 -->
+								<a href="/settings/account" class="btn js-tooltip settings dropdown-toggle js-dropdown-toggle" id="user-dropdown-toggle" data-placement="bottom" role="button" aria-haspopup="true" data-original-title="个人资料与账号"><img class="avatar size32" src="${users.avatar }" alt="Profile and settings" data-user-id="116652192"></a>
 								<div class="dropdown-menu">
 									<div class="dropdown-caret">
 										<span class="caret-outer"></span>
@@ -122,11 +123,11 @@
 
 						<a class="DashboardProfileCard-bg u-bgUserColor u-block" href="/Rainsho" tabindex="-1" aria-hidden="true">
 						</a>
-
+						
 						<div class="DashboardProfileCard-content">
-
-							<a class="DashboardProfileCard-avatarLink u-inlineBlock" href="/Rainsho" title="Rainsho" tabindex="-1" aria-hidden="true">
-								<img class="DashboardProfileCard-avatarImage js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/1152020704/rainser__2__bigger.jpg" alt="">
+							<!-- 用户头像 -->
+							<a class="DashboardProfileCard-avatarLink u-inlineBlock" href="/Rainsho" title="${users.nickname }" tabindex="-1" aria-hidden="true">
+								<img class="DashboardProfileCard-avatarImage js-action-profile-avatar" src="${users.avatar }" alt="">
 							</a>
 
 							<div class="DashboardProfileCard-userFields">

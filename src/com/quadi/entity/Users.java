@@ -15,11 +15,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.DynamicInsert;
+
 /**
  * Users entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "users", catalog = "twcn")
+@DynamicInsert(true)
 public class Users implements java.io.Serializable {
 
 	// Fields

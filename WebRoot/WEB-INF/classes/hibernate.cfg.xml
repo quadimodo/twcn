@@ -19,21 +19,22 @@
 	</property>
 	<property name="myeclipse.connection.profile">mysql</property>
 	<property name="shwo_sql">true</property>
-	
-	<mapping class=" com.quadi.entity.Directmsgs"/>
-	<mapping class=" com.quadi.entity.Forwards"/>
-	<mapping class=" com.quadi.entity.Likes"/>
-	<mapping class=" com.quadi.entity.Mentions"/>
-	<mapping class=" com.quadi.entity.Pics"/>
-	<mapping class=" com.quadi.entity.Relationships"/>
-	<mapping class=" com.quadi.entity.Replays"/>
-	<mapping class=" com.quadi.entity.T2p"/>
-	<mapping class=" com.quadi.entity.T2t"/>
-	<mapping class=" com.quadi.entity.Topics"/>
-	<mapping class=" com.quadi.entity.Tweets"/>
-	<mapping class=" com.quadi.entity.Users"/>
-	<mapping class=" com.quadi.entity.Videos"/>
-	
+	<property name="dynamic-insert">true</property>
+	<property name="dynamic-update">true</property>
+	<mapping class="com.quadi.entity.Forwards" />
+	<mapping class="com.quadi.entity.Directmsgs" />
+	<mapping class="com.quadi.entity.Likes" />
+	<mapping class="com.quadi.entity.Mentions" />
+	<mapping class="com.quadi.entity.Pics" />
+	<mapping class="com.quadi.entity.Relationships" />
+	<mapping class="com.quadi.entity.Replays" />
+	<mapping class="com.quadi.entity.T2p" />
+	<mapping class="com.quadi.entity.T2t" />
+	<mapping class="com.quadi.entity.Topics" />
+	<mapping class="com.quadi.entity.Tweets" />
+	<mapping class="com.quadi.entity.Users" />
+	<mapping class="com.quadi.entity.Videos" />
+
 </session-factory>
 
 </hibernate-configuration>
