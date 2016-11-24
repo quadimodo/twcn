@@ -1,3 +1,10 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html>
 <html>
 
@@ -9,13 +16,28 @@
 		<link rel="stylesheet" href="css/bundle-twitter.css" />
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+		<link rel="stylesheet" href="js/validate/validationEngine.jquery.css">
 		<link rel="stylesheet" href="css/twitter_core.bundle.css">
 		<link rel="stylesheet" href="css/twitter_more_1.bundle.css">
 		<link rel="stylesheet" href="css/twitter_more_2.bundle.css">
-
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/validate/jquery.validationEngine.min.js"></script>
+		<script type="text/javascript" src="js/validate/jquery.validationEngine-zh_CN.js"></script>
+		<script type="text/javascript">
+		//初始化jquery validate
+		$(function(){
+			$("#user_screen_name").blur(function(){
+				var newname=$(this).value();
+				var oldname=$("#orig_uname").value();
+				if(newname!=oldname){
+					$("#account-form").validationEngine();			
+				}
+			});
+		});
+			
+	</script>
 	</head>
-
+		
 	<body>
 
 		<div class="global-nav" data-section-term="top_nav">
@@ -294,7 +316,9 @@
 						</div>
 					</div>
 					<div class="content-inner no-stream-end">
-
+						
+						
+						<!-- 第一个form表单   start -->
 						<form id="account-form" class="t1-form form-horizontal requires-password" autocomplete="off" method="POST" action="https://twitter.com/settings/accounts/update">
 							<div id="settings-alert-box" class="alert hidden">
 								<span id="settings-alert-close" class="icon close"></span>
@@ -303,14 +327,14 @@
 							<input type="hidden" value="PUT" name="_method">
 							<input type="hidden" name="authenticity_token" value="7f78bfd71a1dc92872551b7633dbdac2c04d92c4">
 
-							<input type="hidden" id="orig_uname" name="orig_uname" value="RainshoTwcn">
-							<input type="hidden" id="orig_email" name="orig_email" value="rainsho@126.com">
+							<input type="hidden" id="orig_uname" name="orig_uname" value="${users.nickname }">
+							<input type="hidden" id="orig_email" name="orig_email" value="${users.email }">
 
 							<div id="username_fieldset" class="control-group">
 								<label for="user_screen_name" class="t1-label control-label">用户名</label>
 								<div class="controls">
 									<p id="username_notification" class="notification"></p>
-									<input id="user_screen_name" maxlength="15" name="user[screen_name]" type="text" value="RainshoTwcn">
+									<input id="user_screen_name" class="validate[required,ajax[nickname]]" maxlength="15" name="users.nickname" type="text" value="${users.nickname }">
 									<p class="notification">https://twitter.com/<span id="username_path">RainshoTwcn</span></p>
 								</div>
 							</div>
@@ -319,7 +343,7 @@
 								<label for="user_email" class="t1-label control-label">邮件地址</label>
 								<div class="controls">
 									<p id="email_notification" class="notification"></p>
-									<input id="user_email" class="email-input" name="user[email]" type="text" value="rainsho@126.com">
+									<input id="user_email" class="validate[required,ajax[email],customed[email]] email-input" name="users.email" type="text" value="${users.email }">
 									<p>邮件地址不会公开显示。
 										<a href="https://support.twitter.com/articles/15356" target="_blank">了解更多</a>。</p>
 									<p></p>
@@ -334,7 +358,12 @@
 							</div>
 
 						</form>
-
+						<!-- 第一个form表单   end -->
+						
+						
+						
+						
+						
 					</div>
 				</div>
 
@@ -392,7 +421,16 @@
 
 			</div>
 		</div>
-
+		
 	</body>
-
+	<script type="text/javascript">
+	$.validationEngineLanguage.allRules.checkyzm={
+	  		url: "ServletApiAction!checkYzm.action",
+			  extraData: "times="+Math.random(),
+			  alertTextOk: '<strong style="color:#090;">可以使用√<strong>',
+			  alertText: "<strong>不能使用×</strong>",
+			  alertTextLoad: "正在验证"
+		};
+	
+	</script>
 </html>
