@@ -150,6 +150,7 @@ public class UsersAction {
 		 tweetsList=tweetsService.findTweetistByUid(users, 1);
 		return "login";
 	}
+	//ajax修改用户名
 	//公共方法，提供service
 	public  Map<String, Object> commonService(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");

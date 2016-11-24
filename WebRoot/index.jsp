@@ -32,7 +32,7 @@
 					<div role="navigation" style="display: inline-block;">
 						<ul class="nav js-global-actions" id="global-actions">
 							<li id="global-nav-home" class="home active new" data-global-action="home">
-								<a class="js-nav js-tooltip js-dynamic-tooltip" data-placement="bottom" href="/" data-component-context="home_nav" data-nav="home" data-original-title="">
+								<a class="js-nav js-tooltip js-dynamic-tooltip" data-placement="bottom" href="signupAction!homepage.action" data-component-context="home_nav" data-nav="home" data-original-title="">
 									<span class="Icon Icon--home Icon--large"></span>
 									<span class="text">主页</span>
 								</a>
@@ -70,7 +70,7 @@
 						<ul class="nav right-actions">
 							<li class="me dropdown session js-session" data-global-action="t1me" id="user-dropdown">
 							<!-- 个人小头像 -->
-								<a href="/settings/account" class="btn js-tooltip settings dropdown-toggle js-dropdown-toggle" id="user-dropdown-toggle" data-placement="bottom" role="button" aria-haspopup="true" data-original-title="个人资料与账号"><img class="avatar size32" src="${users.avatar }" alt="Profile and settings" data-user-id="116652192"></a>
+								<a href="setting.jsp" class="btn js-tooltip settings dropdown-toggle js-dropdown-toggle" id="user-dropdown-toggle" data-placement="bottom" role="button" aria-haspopup="true" data-original-title="个人资料与账号"><img class="avatar size32" src="${users.avatar }" alt="Profile and settings" data-user-id="116652192"></a>
 								<div class="dropdown-menu">
 									<div class="dropdown-caret">
 										<span class="caret-outer"></span>

@@ -27,8 +27,8 @@
 		//初始化jquery validate
 		$(function(){
 			$("#user_screen_name").blur(function(){
-				var newname=$(this).value();
-				var oldname=$("#orig_uname").value();
+				var newname=$(this).val();
+				var oldname=$("#orig_uname").val();
 				if(newname!=oldname){
 					$("#account-form").validationEngine();			
 				}
@@ -46,7 +46,7 @@
 					<div role="navigation" style="display: inline-block;">
 						<ul class="nav js-global-actions" id="global-actions">
 							<li id="global-nav-home" class="home active new" data-global-action="home">
-								<a class="js-nav js-tooltip js-dynamic-tooltip" data-placement="bottom" href="/" data-component-context="home_nav" data-nav="home" data-original-title="">
+								<a class="js-nav js-tooltip js-dynamic-tooltip" data-placement="bottom" href="signupAction!homepage.action" data-component-context="home_nav" data-nav="home" data-original-title="">
 									<span class="Icon Icon--home Icon--large"></span>
 									<span class="text">主页</span>
 								</a>
@@ -83,7 +83,7 @@
 						</div>
 						<ul class="nav right-actions">
 							<li class="me dropdown session js-session" data-global-action="t1me" id="user-dropdown">
-								<a href="/settings/account" class="btn js-tooltip settings dropdown-toggle js-dropdown-toggle" id="user-dropdown-toggle" data-placement="bottom" role="button" aria-haspopup="true" data-original-title="个人资料与账号"><img class="avatar size32" src="https://pbs.twimg.com/profile_images/1152020704/rainser__2__normal.jpg" alt="Profile and settings" data-user-id="116652192"></a>
+								<a href="/settings/account" class="btn js-tooltip settings dropdown-toggle js-dropdown-toggle" id="user-dropdown-toggle" data-placement="bottom" role="button" aria-haspopup="true" data-original-title="个人资料与账号"><img class="avatar size32" src="${users.avatar }" alt="Profile and settings" data-user-id="116652192"></a>
 								<div class="dropdown-menu">
 									<div class="dropdown-caret">
 										<span class="caret-outer"></span>
@@ -140,15 +140,15 @@
 						<div class="DashboardProfileCard-content">
 
 							<a class="DashboardProfileCard-avatarLink u-inlineBlock" href="/RainshoTwcn" title="twcn" tabindex="-1" aria-hidden="true">
-								<img class="DashboardProfileCard-avatarImage js-action-profile-avatar" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" alt="">
+								<img class="DashboardProfileCard-avatarImage js-action-profile-avatar" src="${users.avatar }" alt="">
 							</a>
 
 							<div class="DashboardProfileCard-userFields">
 								<div class="DashboardProfileCard-name u-textTruncate">
-									<a class="u-textInheritColor" href="/RainshoTwcn">twcn</a>
+									<a class="u-textInheritColor" href="/RainshoTwcn">${users.nickname }</a>
 								</div>
 								<span class="DashboardProfileCard-screenname u-inlineBlock u-dir" dir="ltr">
-          <a class="DashboardProfileCard-screennameLink u-linkComplex u-linkClean" href="/RainshoTwcn">@<span class="u-linkComplex-target">RainshoTwcn</span></a>
+          <a class="DashboardProfileCard-screennameLink u-linkComplex u-linkClean" href="/RainshoTwcn">@<span class="u-linkComplex-target">${users.username }</span></a>
 								</span>
 							</div>
 
@@ -424,8 +424,8 @@
 		
 	</body>
 	<script type="text/javascript">
-	$.validationEngineLanguage.allRules.checkyzm={
-	  		url: "ServletApiAction!checkYzm.action",
+	$.validationEngineLanguage.allRules.nickname={
+	  		url: "usersAction!update.action",
 			  extraData: "times="+Math.random(),
 			  alertTextOk: '<strong style="color:#090;">可以使用√<strong>',
 			  alertText: "<strong>不能使用×</strong>",
