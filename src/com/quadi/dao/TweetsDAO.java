@@ -56,8 +56,15 @@ public class TweetsDAO {
 	}
 	//根据用户id查询关注人的推特
 	public List<?> findTweetByUid(Users user,int currentpage){
-		String hql="from Tweets a where a.users.uid in (select a.rsid from Relationships a where a.usersByHuid=:uid) order by a.tweettime desc";
-		List<?> list=sessionFactory.openSession().createQuery(hql).setInteger("uid", user.getUid()).setFirstResult((currentpage-1)*5).setMaxResults(5).list();
+		String hql="from Tweets a where a.users.uid in (select a.usersBySuid.uid from Relationships a where a.usersByHuid=:uid) order by a.tweettime desc";
+		List<?> list=sessionFactory.openSession().createQuery(hql).setInteger("uid", user.getUid()).setFirstResult((currentpage-1)*5).setMaxResults(5).list();                       
+		return list;
+	}
+	
+	//根据推特id查询本推特的图片
+	public List<?> findPicByTweets(Tweets tweets){
+		String hql="from T2p a where a.tweets.tid=:tid";
+		List<?> list=getCurrentSession().createQuery(hql).setInteger("tid", tweets.getTid()).list();
 		return list;
 	}
 	public void save(Tweets transientInstance) {

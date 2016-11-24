@@ -56,7 +56,7 @@ public class T2p implements java.io.Serializable {
 		this.tweets = tweets;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pid", nullable = false)
 	public Pics getPics() {
 		return this.pics;

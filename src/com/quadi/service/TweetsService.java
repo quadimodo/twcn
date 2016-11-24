@@ -1,9 +1,12 @@
 package com.quadi.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.quadi.dao.TweetsDAO;
+import com.quadi.entity.T2p;
 import com.quadi.entity.Tweets;
 import com.quadi.entity.Users;
 import com.quadi.util.entity.Twt_RltNumBean;
@@ -44,12 +47,17 @@ public class TweetsService {
 	}
 	//返回值，给首页
 	public List<Tweets> findTweetistByUid(Users users,int currentpage){
-		Object[] array=new Object[2];
 		List<Tweets> list=(List<Tweets>) tweetsDAO.findTweetByUid(users, currentpage);
 		UtilTool utilTool=new UtilTool();
-		for (Tweets li : list) {
+		for(int i=0;i<list.size();i++){
 			//将转换的值赋给utilbean这个list
-			li.setFormateTime(utilTool.formatTime(li.getTweettime()));
+			list.get(i).setFormateTime(utilTool.formatTime(list.get(i).getTweettime()));
+			List<T2p> picList=(List<T2p>) tweetsDAO.findPicByTweets(list.get(i));
+			Set<T2p> set=new HashSet<T2p>();
+			if(picList.size()!=0){
+				set.addAll(picList);
+				list.get(i).setT2ps(set);				
+			}
 		}
 		System.out.println("推特数量为="+list.size());
 		return list;
