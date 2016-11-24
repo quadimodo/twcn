@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Tweets entity. @author MyEclipse Persistence Tools
@@ -22,7 +23,6 @@ import javax.persistence.Table;
 public class Tweets implements java.io.Serializable {
 
 	// Fields
-
 	private Integer tid;
 	private Users users;
 	private Videos videos;
@@ -35,11 +35,21 @@ public class Tweets implements java.io.Serializable {
 	private Set<Mentions> mentionses = new HashSet<Mentions>(0);
 	private Set<T2t> t2ts = new HashSet<T2t>(0);
 	private Set<Forwards> forwardses = new HashSet<Forwards>(0);
-
+	private String formateTime;
 	// Constructors
 
 	/** default constructor */
 	public Tweets() {
+	}
+	
+	
+	@Transient
+	public String getFormateTime() {
+		return formateTime;
+	}
+
+	public void setFormateTime(String formateTime) {
+		this.formateTime = formateTime;
 	}
 
 	/** minimal constructor */

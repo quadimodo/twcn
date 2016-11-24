@@ -3,6 +3,13 @@ package com.quadi.util.entity;
 public class Twt_RltNumBean {
 	private long tweetNum;
 	private long relationNum;
+	private String formattimes;
+	public String getFormattimes() {
+		return formattimes;
+	}
+	public void setFormattimes(String formattimes) {
+		this.formattimes = formattimes;
+	}
 	public long getTweetNum() {
 		return tweetNum;
 	}

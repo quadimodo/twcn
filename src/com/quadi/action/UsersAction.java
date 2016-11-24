@@ -30,7 +30,7 @@ public class UsersAction {
 	private TweetsService tweetsService;
 	private Relationships relationships;
 	private RelationshipsService relationshipsService;
-	private List<?> tweetsList;
+	private List<Tweets> tweetsList;
 	
 	public Tweets getTweets() {
 		return tweets;
@@ -41,7 +41,7 @@ public class UsersAction {
 	public List<?> getTweetsList() {
 		return tweetsList;
 	}
-	public void setTweetsList(List<?> tweetsList) {
+	public void setTweetsList(List<Tweets> tweetsList) {
 		this.tweetsList = tweetsList;
 	}
 	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
@@ -146,7 +146,8 @@ public class UsersAction {
 		twt_RltNumBean.setTweetNum(tweetsService.findByUid(users));
 		twt_RltNumBean.setRelationNum(relationshipsService.findByHuid());
 		//返回推特
-		tweetsList=tweetsService.findTweetistByUid(users, 1);
+		//tweetsList=tweetsService.findTweetistByUid(users, 1);
+		 tweetsList=tweetsService.findTweetistByUid(users, 1);
 		return "login";
 	}
 	//公共方法，提供service

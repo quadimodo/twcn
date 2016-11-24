@@ -391,7 +391,7 @@
 									</a>
 
 									<small class="time">
-  <a href="/NewYorker/status/793256326352822272" class="tweet-timestamp js-permalink js-nav js-tooltip" title="上午9:00 - 2016年11月1日"><span class="_timestamp js-short-timestamp js-relative-timestamp" data-time="1477962020" data-time-ms="1477962020000" data-long-form="true" aria-hidden="true">38分</span><span class="u-hiddenVisually" data-aria-label-part="last">38分钟前</span></a>
+  <a href="/NewYorker/status/793256326352822272" class="tweet-timestamp js-permalink js-nav js-tooltip" title="上午9:00 - 2016年11月1日"><span class="_timestamp js-short-timestamp js-relative-timestamp" data-time="1477962020" data-time-ms="1477962020000" data-long-form="true" aria-hidden="true">${list.formateTime }</span><span class="u-hiddenVisually" data-aria-label-part="last">${list.tweettime }</span></a>
 </small>
 
 									<button type="button" class="btn-link js-translate-tweet translate-button" data-nav="translate_tweet">
