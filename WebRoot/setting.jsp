@@ -26,14 +26,15 @@
 		<script type="text/javascript">
 		//初始化jquery validate
 		$(function(){
-			$("#user_screen_name").blur(function(){
-				var newname=$(this).val();
-				var oldname=$("#orig_uname").val();
-				if(newname!=oldname){
-					$("#account-form").validationEngine();			
-				}
-			});
+			
+			$("#account-form").validationEngine('attach',{
+				addPromptClass : 'formError-noArrow formError-small formError-white',
+				autoHidePrompt : "true",
+				autoHideDelay : 3000,
 		});
+			
+		});	
+		
 			
 	</script>
 	</head>
@@ -319,7 +320,7 @@
 						
 						
 						<!-- 第一个form表单   start -->
-						<form id="account-form" class="t1-form form-horizontal requires-password" autocomplete="off" method="POST" action="https://twitter.com/settings/accounts/update">
+						<form id="account-form" class="t1-form form-horizontal requires-password" autocomplete="off" method="POST" action="login.jsp">
 							<div id="settings-alert-box" class="alert hidden">
 								<span id="settings-alert-close" class="icon close"></span>
 							</div>
@@ -334,7 +335,7 @@
 								<label for="user_screen_name" class="t1-label control-label">用户名</label>
 								<div class="controls">
 									<p id="username_notification" class="notification"></p>
-									<input id="user_screen_name" class="validate[required,ajax[nickname]]" maxlength="15" name="users.nickname" type="text" value="${users.nickname }">
+									<input id="user_screen_name" class="required,validate[ajax[nickname]]" maxlength="15" name="users.nickname" type="text" value="${users.nickname }">
 									<p class="notification">https://twitter.com/<span id="username_path">RainshoTwcn</span></p>
 								</div>
 							</div>
@@ -343,7 +344,7 @@
 								<label for="user_email" class="t1-label control-label">邮件地址</label>
 								<div class="controls">
 									<p id="email_notification" class="notification"></p>
-									<input id="user_email" class="validate[required,ajax[email],customed[email]] email-input" name="users.email" type="text" value="${users.email }">
+									<input id="user_email" class="required,customed[email],validate[ajax[ajaxEmail]] email-input" name="users.email" type="text" value="${users.email }">
 									<p>邮件地址不会公开显示。
 										<a href="https://support.twitter.com/articles/15356" target="_blank">了解更多</a>。</p>
 									<p></p>
@@ -353,7 +354,7 @@
 							<hr>
 
 							<div class="form-actions">
-								<button id="settings_save" class="btn primary-btn" type="submit" disabled="disabled">保存更改</button>
+								<button id="settings_save" class="btn primary-btn" type="submit" >保存更改</button>
 								<span class="spinner-small settings-save-spinner"></span>
 							</div>
 
@@ -425,12 +426,17 @@
 	</body>
 	<script type="text/javascript">
 	$.validationEngineLanguage.allRules.nickname={
-	  		url: "usersAction!update.action",
+	  		url: "ajaxUsername!ajaxUsername.action",
 			  extraData: "times="+Math.random(),
 			  alertTextOk: '<strong style="color:#090;">可以使用√<strong>',
 			  alertText: "<strong>不能使用×</strong>",
 			  alertTextLoad: "正在验证"
+		},ajaxEmail={
+			url: "ajaxUsername!ajaxUsername.action",
+			extraData: "times="+Math.random(),
+			alertTextOk: '<strong style="color:#090;">可以使用√<strong>',
+			alertText: "<strong>不能使用×</strong>",
+			alertTextLoad: "正在验证"
 		};
-	
 	</script>
 </html>

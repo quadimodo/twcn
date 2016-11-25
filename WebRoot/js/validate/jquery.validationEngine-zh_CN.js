@@ -212,7 +212,17 @@
 				 * 		// speaks by itself
 				 * 		"alertTextLoad": "* 正在确认名称是否有其他人使用，请稍等。"
 				 * 	}
+				 * 
+				 * 
+				 * 
 				 */
+				,"ajaxEmail" :{
+					url: "ajaxUsername!ajaxUsername.action",
+					extraData: "times="+Math.random(),
+					alertTextOk: '<strong style="color:#090;">可以使用√<strong>',
+					alertText: "<strong>不能使用×</strong>",
+					alertTextLoad: "正在验证"
+				}
 			};
 			
 		}

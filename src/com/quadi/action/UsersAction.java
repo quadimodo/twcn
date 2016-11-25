@@ -1,10 +1,16 @@
 package com.quadi.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
@@ -31,7 +37,14 @@ public class UsersAction {
 	private Relationships relationships;
 	private RelationshipsService relationshipsService;
 	private List<Tweets> tweetsList;
-	
+	private JSONArray jsonArray;
+
+	public JSONArray getJsonArray() {
+		return jsonArray;
+	}
+	public void setJsonArray(JSONArray jsonArray) {
+		this.jsonArray = jsonArray;
+	}
 	public Tweets getTweets() {
 		return tweets;
 	}
@@ -151,6 +164,25 @@ public class UsersAction {
 		return "login";
 	}
 	//ajax修改用户名
+	public String ajaxUsername(){
+		Map<String, Object> maplist=commonService();
+		userService=(UserService) maplist.get("userService");
+		HttpServletRequest request=ServletActionContext.getRequest();
+		HttpServletResponse response=ServletActionContext.getResponse();
+		try {
+			PrintWriter out=response.getWriter();
+			String name=request.getParameter("fieldValue");
+			String id=request.getParameter("fieldId");
+			jsonArray=JSONArray.fromObject(userService.ajaxUsername(name,id ));
+			out.println(jsonArray);
+			out.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		//jsonobj=JSONObject.fromObject(userService.ajaxUsername(name,id ));
+		return null;
+	}
 	//公共方法，提供service
 	public  Map<String, Object> commonService(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");

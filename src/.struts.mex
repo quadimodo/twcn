@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Struts2Diagram version="2.0">
-  <package name="default" location="225,10" size="280,490">
+  <package name="default" location="240,10" size="280,490">
     <action name="usersAction" location="65,71" size="150,83">
       <result name="login">
         <resourceEdge source="login" routing="0" target="index.jsp" />
@@ -16,11 +16,11 @@
       <result name="login">
         <resourceEdge source="login" routing="0" target="index.jsp" />
       </result>
-      <result name="error">
-        <resourceEdge source="error" routing="0" target="login.jsp" />
-      </result>
       <result name="home">
         <resourceEdge source="home" routing="0" target="homeAction" namespace="" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="login.jsp" />
       </result>
     </action>
     <action name="homeAction" location="65,232" size="150,41">
@@ -29,7 +29,12 @@
       </result>
     </action>
   </package>
-  <webResource name="index.jsp" path="/index.jsp" location="10,227" size="150,55" />
-  <webResource name="login.jsp" path="/login.jsp" location="570,87" size="150,55" />
+  <webResource name="index.jsp" path="/index.jsp" location="25,227" size="150,55" />
+  <webResource name="login.jsp" path="/login.jsp" location="585,87" size="150,55" />
+  <package name="ajax_json" location="843,259" size="180,71">
+    <action name="ajaxAction" location="15,23" size="150,41">
+      <result name="success" />
+    </action>
+  </package>
 </Struts2Diagram>
 

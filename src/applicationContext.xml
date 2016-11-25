@@ -141,11 +141,6 @@
 		</property>
 		
 	</bean>
-	<bean id="RelationshipsAction" class="com.quadi.action.RelationshipsAction">
-		<property name="relationshipsService">
-			<ref bean="RelationshipsService" />
-		</property>
-	</bean>
 	<!-- Relationships end -->
 	
 	
