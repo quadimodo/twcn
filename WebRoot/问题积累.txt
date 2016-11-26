@@ -1,0 +1,20 @@
+1.将对象导入hql，其中控制会覆盖数据库默认值。
+
+在类中添加注解@DynamicInsert(true) 或者@DynamicUpdate(true)
+
+2.bean中添加非数据库字段，会报错
+在字段的get方法前加@Transient，会忽略这个字段
+
+3.struts2 s标签循环遍历
+<s:iterator value="list" var="list1">
+<s:iterator value="#list1" var="list2">
+   <s:property value="#list2.getName()" />
+</s:iterator>
+</s:iterator>
+
+
+4.上传文件目录
+//项目地址
+		String realpath = "D://Workspaces//MyEclipse Professional//SSH//WebRoot//upload//";
+//tomcat地址
+		String path = ServletActionContext.getServletContext().getRealPath("/upload");

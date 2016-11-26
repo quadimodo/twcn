@@ -26,13 +26,23 @@
 		<script type="text/javascript">
 		//初始化jquery validate
 		$(function(){
-			
-			$("#account-form").validationEngine('attach',{
+			$("#user_screen_name").focus(function(){
+				$("#account-form").validationEngine('attach',{
 				addPromptClass : 'formError-noArrow formError-small formError-white',
 				autoHidePrompt : "true",
 				autoHideDelay : 3000,
-		});
-			
+			});
+			$("#password-form").validationEngine("detach");	
+			});
+			$("#current_password").focus(function(){
+				$("#password-form").validationEngine('attach',{
+					addPromptClass : 'formError-noArrow formError-small formError-white',
+					autoHidePrompt : "true",
+					autoHideDelay : 3000,
+				});
+				$("#account-form").validationEngine("detach");	
+				
+			});
 		});	
 		
 			
@@ -376,6 +386,9 @@
 						</div>
 					</div>
 					<div class="content-inner no-stream-end">
+					
+					
+					<!-- 更改登录密码  start-->
 						<form class="t1-form form-horizontal" id="password-form" method="POST" action="https://twitter.com/settings/passwords/update">
 							<div id="settings-alert-box" class="alert hidden">
 								<span id="settings-alert-close" class="icon close"></span>
@@ -386,7 +399,8 @@
 							<div class="control-group">
 								<label for="current_password" class="t1-label control-label">当前密码</label>
 								<div class="controls">
-									<input id="current_password" type="password" name="current_password">
+								<!-- 原密码 -->
+									<input id="current_password" class="validate[required]" type="password" name="user.password">
 									<p>
 										<a href="/account/access_password_reset" id="forgot_password" class="js-static-forgot-password">忘记密码了?</a>
 
@@ -397,14 +411,14 @@
 								<div class="control-group">
 									<label for="user_password" class="t1-label control-label">新密码</label>
 									<div id="password_strength" class="controls">
-										<input id="user_password" type="password" name="user_password">
+										<input id="user_password" class="validate[required]"type="password" name="user_password">
 										<small id="password_strength_feedback" class="help-inline help-error" style="display: none;"></small>
 									</div>
 								</div>
 								<div class="control-group">
 									<label for="user_password_confirmation" class="t1-label control-label">确认密码</label>
 									<div class="controls">
-										<input id="user_password_confirmation" type="password" name="user_password_confirmation">
+										<input id="user_password_confirmation" class="validate[required,equals[user_password]]" type="password" name="user_password_confirmation">
 										<small id="password_match" class="help-inline help-error" style="display: none;">密码不匹配</small>
 									</div>
 								</div>
@@ -417,6 +431,11 @@
 							</div>
 
 						</form>
+						<!-- 更改登录密码  end-->
+						
+						
+						
+						
 					</div>
 				</div>
 
