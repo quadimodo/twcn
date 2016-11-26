@@ -82,4 +82,11 @@ public class UserService {
 		}
 		return obj;
 	}
+	//修改用户名表单提交,返回修改过后的user
+	public Users updateUnameEmail(Users user){
+		usersDAO.updateUnameEmail(user);
+		
+		user=usersDAO.findById(user.getUid());
+		return user;
+	}
 }

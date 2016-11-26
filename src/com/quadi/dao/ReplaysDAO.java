@@ -23,7 +23,7 @@ import com.quadi.entity.Replays;
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.quadi.dao.Replays
+ * @see com.quadi.entity.Replays
  * @author MyEclipse Persistence Tools
  */
 @Transactional

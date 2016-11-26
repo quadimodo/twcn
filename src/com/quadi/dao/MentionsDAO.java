@@ -23,7 +23,7 @@ import com.quadi.entity.Mentions;
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.quadi.dao.Mentions
+ * @see com.quadi.entity.Mentions
  * @author MyEclipse Persistence Tools
  */
 @Transactional

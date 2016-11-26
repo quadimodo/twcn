@@ -23,7 +23,7 @@ import com.quadi.entity.Likes;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.quadi.dao.Likes
+ * @see com.quadi.entity.Likes
  * @author MyEclipse Persistence Tools
  */
 @Transactional

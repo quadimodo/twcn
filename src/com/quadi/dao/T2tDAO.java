@@ -23,7 +23,7 @@ import com.quadi.entity.T2t;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.quadi.dao.T2t
+ * @see com.quadi.entity.T2t
  * @author MyEclipse Persistence Tools
  */
 @Transactional

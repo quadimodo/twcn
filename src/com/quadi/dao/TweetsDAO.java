@@ -24,7 +24,7 @@ import com.quadi.entity.Users;
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.quadi.dao.Tweets
+ * @see com.quadi.entity.Tweets
  * @author MyEclipse Persistence Tools
  */
 @Transactional

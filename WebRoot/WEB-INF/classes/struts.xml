@@ -16,6 +16,9 @@
 		<action name="homeAction" class="com.quadi.action.UsersAction" method="homepage">
 			<result name="login">/index.jsp</result>
 		</action>
+		<action name="updateAction" class="com.quadi.action.UsersAction" method="formUnameEmail">
+			<result name="setting">/setting.jsp</result>
+		</action>
 		<action name="ajax*" class="com.quadi.action.UsersAction" method="{1}">
 			<!-- <result name="{1}">/setting.jsp</result> -->
 		</action>

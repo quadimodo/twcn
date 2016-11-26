@@ -320,7 +320,7 @@
 						
 						
 						<!-- 第一个form表单   start -->
-						<form id="account-form" class="t1-form form-horizontal requires-password" autocomplete="off" method="POST" action="login.jsp">
+						<form id="account-form" class="t1-form form-horizontal requires-password" autocomplete="off" method="POST" action="updateAction!formUnameEmail.action">
 							<div id="settings-alert-box" class="alert hidden">
 								<span id="settings-alert-close" class="icon close"></span>
 							</div>
@@ -330,7 +330,7 @@
 
 							<input type="hidden" id="orig_uname" name="orig_uname" value="${users.nickname }">
 							<input type="hidden" id="orig_email" name="orig_email" value="${users.email }">
-
+							<input type="hidden" id="orig_uid" name="users.uid" value="${users.uid }">
 							<div id="username_fieldset" class="control-group">
 								<label for="user_screen_name" class="t1-label control-label">用户名</label>
 								<div class="controls">

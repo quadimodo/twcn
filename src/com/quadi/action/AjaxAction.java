@@ -24,7 +24,7 @@ public class AjaxAction {
 		this.userService = userService;
 	}
 
-		//ajax修改用户名
+		/*//ajax修改用户名
 		public String ajaxUsername(){
 			HttpServletRequest request=ServletActionContext.getRequest();
 			String name=request.getParameter("fieldValue");
@@ -32,5 +32,5 @@ public class AjaxAction {
 			 this.jsonobj=userService.ajaxUsername(name,id );
 			
 			return "success";
-		}
+		}*/
 }

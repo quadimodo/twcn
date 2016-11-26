@@ -183,6 +183,16 @@ public class UsersAction {
 		//jsonobj=JSONObject.fromObject(userService.ajaxUsername(name,id ));
 		return null;
 	}
+	//获取修改过后的用户名，放入session并跳转页面
+	public String formUnameEmail(){
+		Map<String, Object> maplist=commonService();
+		userService=(UserService) maplist.get("userService");
+		HttpServletRequest request=ServletActionContext.getRequest();
+		//users=(Users) request.getSession().getAttribute("users");
+		users=userService.updateUnameEmail(users);
+		request.getSession().setAttribute("users", users);
+		return "setting";
+	}
 	//公共方法，提供service
 	public  Map<String, Object> commonService(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");

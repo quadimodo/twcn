@@ -23,7 +23,7 @@ import com.quadi.entity.Topics;
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.quadi.dao.Topics
+ * @see com.quadi.entity.Topics
  * @author MyEclipse Persistence Tools
  */
 @Transactional

@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 /**
  * Users entity. @author MyEclipse Persistence Tools
@@ -23,6 +24,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "users", catalog = "twcn")
 @DynamicInsert(true)
+@DynamicUpdate(true)
 public class Users implements java.io.Serializable {
 
 	// Fields

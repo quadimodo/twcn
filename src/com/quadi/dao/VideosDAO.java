@@ -23,7 +23,7 @@ import com.quadi.entity.Videos;
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.quadi.dao.Videos
+ * @see com.quadi.entity.Videos
  * @author MyEclipse Persistence Tools
  */
 @Transactional
@@ -73,7 +73,7 @@ public class VideosDAO {
 		log.debug("getting Videos instance with id: " + id);
 		try {
 			Videos instance = (Videos) getCurrentSession().get(
-					"com.quadi.dao.Videos", id);
+					"com.quadi.entity.Videos", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -85,7 +85,7 @@ public class VideosDAO {
 		log.debug("finding Videos instance by example");
 		try {
 			List<Videos> results = (List<Videos>) getCurrentSession()
-					.createCriteria("com.quadi.dao.Videos")
+					.createCriteria("com.quadi.entity.Videos")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

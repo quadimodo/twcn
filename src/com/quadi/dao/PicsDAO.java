@@ -23,7 +23,7 @@ import com.quadi.entity.Pics;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.quadi.dao.Pics
+ * @see com.quadi.entity.Pics
  * @author MyEclipse Persistence Tools
  */
 @Transactional

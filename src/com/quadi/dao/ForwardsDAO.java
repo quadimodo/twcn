@@ -23,7 +23,7 @@ import com.quadi.entity.Forwards;
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.quadi.dao.Forwards
+ * @see com.quadi.entity.Forwards
  * @author MyEclipse Persistence Tools
  */
 @Transactional

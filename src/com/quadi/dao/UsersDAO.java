@@ -8,6 +8,7 @@ import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +24,7 @@ import com.quadi.entity.Users;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.quadi.dao.Users
+ * @see com.quadi.entity.Users
  * @author MyEclipse Persistence Tools
  */
 @Transactional
@@ -81,7 +82,7 @@ public class UsersDAO {
 		log.debug("getting Users instance with id: " + id);
 		try {
 			Users instance = (Users) getCurrentSession().get(
-					"com.quadi.dao.Users", id);
+					"com.quadi.entity.Users", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -100,10 +101,17 @@ public class UsersDAO {
 		Users users=(Users) sessionFactory.openSession().createQuery(hql).setString("username",user.getUsername() ).setString("email", user.getEmail()).uniqueResult();
 		return users;
 	}
-/*	//查询正在关注的人（根据huid查询users）
-	public List<?> findByHuid(Users users){
-		String hql="from Users a where a.";
+	//修改用户数据
+	public int updateUnameEmail(Users user){
 		
+		String hql="update Users a set a.nickname=:nickname , a.email=:email where a.uid=:uid";
+		int i=getCurrentSession().createQuery(hql).setString("nickname", user.getNickname()).setString("email", user.getEmail()).setInteger("uid", user.getUid()).executeUpdate();
+		return i;
+	}
+	//查询正在关注的人（根据huid查询users）
+/*	public List<?> findByHuid(Users users){
+		String hql="from Users a where a.";
+		getCurrentSession().saveOrUpdate(users)
 		return null;
 	}*/
 	
@@ -111,7 +119,7 @@ public class UsersDAO {
 		log.debug("finding Users instance by example");
 		try {
 			List<Users> results = (List<Users>) getCurrentSession()
-					.createCriteria("com.quadi.dao.Users")
+					.createCriteria("com.quadi.entity.Users")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

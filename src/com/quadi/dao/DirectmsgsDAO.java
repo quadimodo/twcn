@@ -23,7 +23,7 @@ import com.quadi.entity.Directmsgs;
  * methods provides additional information for how to configure it for the
  * desired type of transaction control.
  * 
- * @see com.quadi.dao.Directmsgs
+ * @see com.quadi.entity.Directmsgs
  * @author MyEclipse Persistence Tools
  */
 @Transactional
