@@ -48,7 +48,11 @@
 			
 	</script>
 	</head>
-		
+		<style>
+			h5 {
+				color:red;
+			}
+		</style>
 	<body>
 
 		<div class="global-nav" data-section-term="top_nav">
@@ -330,7 +334,7 @@
 						
 						
 						<!-- 第一个form表单   start -->
-						<form id="account-form" class="t1-form form-horizontal requires-password" autocomplete="off" method="POST" action="updateAction!formUnameEmail.action">
+						<form id="account-form" class="t1-form form-horizontal requires-password" autocomplete="off" method="POST" action="form_unameEmail!unameEmail.action">
 							<div id="settings-alert-box" class="alert hidden">
 								<span id="settings-alert-close" class="icon close"></span>
 							</div>
@@ -389,21 +393,21 @@
 					
 					
 					<!-- 更改登录密码  start-->
-						<form class="t1-form form-horizontal" id="password-form" method="POST" action="https://twitter.com/settings/passwords/update">
+						<form class="t1-form form-horizontal" id="password-form" method="POST" action="form_pwd!pwd.action">
 							<div id="settings-alert-box" class="alert hidden">
 								<span id="settings-alert-close" class="icon close"></span>
 							</div>
-
+							<input type="hidden" value="${users.uid }" name="users.uid" >
 							<input type="hidden" value="PUT" name="_method">
 							<input type="hidden" name="authenticity_token" value="7f78bfd71a1dc92872551b7633dbdac2c04d92c4">
 							<div class="control-group">
 								<label for="current_password" class="t1-label control-label">当前密码</label>
 								<div class="controls">
 								<!-- 原密码 -->
-									<input id="current_password" class="validate[required]" type="password" name="user.password">
+									<input id="current_password" class="validate[required]" type="password" name="oldPwd">
 									<p>
 										<a href="/account/access_password_reset" id="forgot_password" class="js-static-forgot-password">忘记密码了?</a>
-
+										<h5 >${twt_RltNumBean.pwdStatus }</h5>
 									</p>
 								</div>
 							</div>
@@ -411,7 +415,7 @@
 								<div class="control-group">
 									<label for="user_password" class="t1-label control-label">新密码</label>
 									<div id="password_strength" class="controls">
-										<input id="user_password" class="validate[required]"type="password" name="user_password">
+										<input id="user_password" class="validate[required]"type="password" name="users.password">
 										<small id="password_strength_feedback" class="help-inline help-error" style="display: none;"></small>
 									</div>
 								</div>
@@ -426,7 +430,7 @@
 
 							<hr>
 							<div class="form-actions">
-								<button id="settings_save" class="btn primary-btn" type="submit" disabled="disabled">保存更改</button>
+								<button id="settings_save" class="btn primary-btn" type="submit" >保存更改</button>
 								<span class="spinner-small settings-save-spinner"></span>
 							</div>
 

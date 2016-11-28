@@ -31,14 +31,21 @@ public class UsersAction {
 	private UserService userService;
 	private String msg;
 	private Users users;
-	private UtilBean utilBean;
 	private Tweets tweets;
 	private TweetsService tweetsService;
 	private Relationships relationships;
 	private RelationshipsService relationshipsService;
 	private List<Tweets> tweetsList;
 	private JSONArray jsonArray;
+	private String oldPwd;
+	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
 
+	public String getOldPwd() {
+		return oldPwd;
+	}
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
+	}
 	public JSONArray getJsonArray() {
 		return jsonArray;
 	}
@@ -57,7 +64,6 @@ public class UsersAction {
 	public void setTweetsList(List<Tweets> tweetsList) {
 		this.tweetsList = tweetsList;
 	}
-	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
 	public TweetsService getTweetsService() {
 		return tweetsService;
 	}
@@ -87,12 +93,6 @@ public class UsersAction {
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
-	}
-	public UtilBean getUtilBean() {
-		return utilBean;
-	}
-	public void setUtilBean(UtilBean utilBean) {
-		this.utilBean = utilBean;
 	}
 	public UserService getUserService() {
 		return userService;
@@ -184,14 +184,27 @@ public class UsersAction {
 		return null;
 	}
 	//获取修改过后的用户名，放入session并跳转页面
-	public String formUnameEmail(){
+	public String unameEmail(){
 		Map<String, Object> maplist=commonService();
 		userService=(UserService) maplist.get("userService");
 		HttpServletRequest request=ServletActionContext.getRequest();
 		//users=(Users) request.getSession().getAttribute("users");
 		users=userService.updateUnameEmail(users);
 		request.getSession().setAttribute("users", users);
-		return "setting";
+		return "unameEmail";
+	}
+	//获取修改过后的密码，进行对比，然后修改
+	public String pwd(){
+		Map<String, Object> maplist=commonService();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		//users=(Users) request.getSession().getAttribute("users");
+		userService=(UserService) maplist.get("userService");
+		if(userService.updatePassword(users, oldPwd)){
+			twt_RltNumBean.setPwdStatus("密码修改成功");
+		}else{
+			twt_RltNumBean.setPwdStatus("原密码错误");
+		}
+		return "pwd";
 	}
 	//公共方法，提供service
 	public  Map<String, Object> commonService(){

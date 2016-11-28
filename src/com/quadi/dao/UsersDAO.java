@@ -108,6 +108,20 @@ public class UsersDAO {
 		int i=getCurrentSession().createQuery(hql).setString("nickname", user.getNickname()).setString("email", user.getEmail()).setInteger("uid", user.getUid()).executeUpdate();
 		return i;
 	}
+	//查询用户密码是否正确
+	public Users findByPwd(Users user,String pwd){
+		String hql="from Users a where a.uid=:uid and a.password=:password";
+		Users users=(Users) getCurrentSession().createQuery(hql).setInteger("uid", user.getUid()).setString("password", pwd).uniqueResult();
+		return users;
+	}
+	//修改用户密码
+	public int updatePwd(Users user){
+		String hql="update Users a set a.password=:password where a.uid=:uid";
+		Query query=getCurrentSession().createQuery(hql).setString("password", user.getPassword()).setInteger("uid",user.getUid());
+			int i=query.executeUpdate();
+		System.out.println(i);
+		return i;
+	}
 	//查询正在关注的人（根据huid查询users）
 /*	public List<?> findByHuid(Users users){
 		String hql="from Users a where a.";

@@ -89,4 +89,16 @@ public class UserService {
 		user=usersDAO.findById(user.getUid());
 		return user;
 	}
+	//修改用户密码
+	public boolean updatePassword(Users user,String oldPwd){
+		Users users=usersDAO.findByPwd(user,oldPwd);
+		//如果查询结果不为空
+		if(users!=null){
+		int i=usersDAO.updatePwd(user);
+			if(i==1){
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -4,13 +4,14 @@ public class Twt_RltNumBean {
 	private long tweetNum;
 	private long relationNum;
 	private String formattimes;
-	private String oldPwd;
+	private String pwdStatus;
 	
-	public String getOldPwd() {
-		return oldPwd;
+
+	public String getPwdStatus() {
+		return pwdStatus;
 	}
-	public void setOldPwd(String oldPwd) {
-		this.oldPwd = oldPwd;
+	public void setPwdStatus(String pwdStatus) {
+		this.pwdStatus = pwdStatus;
 	}
 	public String getFormattimes() {
 		return formattimes;
