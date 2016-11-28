@@ -204,6 +204,7 @@ public class UsersAction {
 		}else{
 			twt_RltNumBean.setPwdStatus("原密码错误");
 		}
+		request.getSession().setAttribute("users", users);
 		return "pwd";
 	}
 	//公共方法，提供service

@@ -184,7 +184,7 @@
 							<form action="signupAction!signup.action" class="t1-form signup"
 								id="frontpage-signup-form" method="post">
 								<div class="field">
-									<input type="text" class="validate[required,custom[onlyLetterNumber],minSize[3],maxSize[30]] text-input zuce" autocomplete="off"
+									<input type="text" class="validate[required,minSize[3],maxSize[30]] text-input zuce" autocomplete="off"
 										name="users.username" maxlength="20" placeholder="全名">
 								</div>
 								<div class="field">

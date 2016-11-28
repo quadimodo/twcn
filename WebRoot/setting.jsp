@@ -23,6 +23,7 @@
 		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="js/validate/jquery.validationEngine.min.js"></script>
 		<script type="text/javascript" src="js/validate/jquery.validationEngine-zh_CN.js"></script>
+		<script type="text/javascript" src="js/sendTwitter.js"></script>
 		<script type="text/javascript">
 		//初始化jquery validate
 		$(function(){

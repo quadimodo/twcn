@@ -18,3 +18,7 @@
 		String realpath = "D://Workspaces//MyEclipse Professional//SSH//WebRoot//upload//";
 //tomcatµÿ÷∑
 		String path = ServletActionContext.getServletContext().getRealPath("/upload");
+
+
+
+5.http://www.360doc.com/content/15/0616/18/19017656_478573801.shtml#
