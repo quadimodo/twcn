@@ -61,6 +61,7 @@ public class TweetsDAO {
 		return list;
 	}
 	
+	
 	//根据推特id查询本推特的图片
 	public List<?> findPicByTweets(Tweets tweets){
 		String hql="from T2p a where a.tweets.tid=:tid";

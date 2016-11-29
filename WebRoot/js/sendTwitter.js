@@ -7,7 +7,7 @@ $(function(){
 		}else{
 			$("#twitter_send").removeAttr("disabled");
 		}
-		
+		$("#tcontent").val(x);
 	});
 	$("#tweet-box-home-timeline").keyup(function(){
 		var x=$(this).text();
@@ -17,7 +17,7 @@ $(function(){
 		}else{
 			$("#twitter_send").removeAttr("disabled");
 		}
-		
+		$("#tcontent").val(x);
 	});
 	
 });

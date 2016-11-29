@@ -22,6 +22,9 @@
 		<action name="ajax*" class="com.quadi.action.UsersAction" method="{1}">
 			<!-- <result name="{1}">/setting.jsp</result> -->
 		</action>
+		<action name="uploadAjax" class="uploadAjaxAction" method="uploadFile">
+			<param name="savePath">/img</param>
+		</action>
 	</package>
 	<!-- <package name="ajax_json" extends="json-default">
 		<action name="ajaxAction" class="com.quadi.action.UsersAction" method="ajaxUsername">

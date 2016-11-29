@@ -164,4 +164,7 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="uploadAjaxAction" class="com.quadi.action.AjaxAction">
+		
+	</bean>
 </beans>

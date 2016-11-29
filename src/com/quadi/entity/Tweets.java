@@ -15,11 +15,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 /**
  * Tweets entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "tweets", catalog = "twcn")
+@DynamicUpdate(true)
+@DynamicInsert(true)
 public class Tweets implements java.io.Serializable {
 
 	// Fields

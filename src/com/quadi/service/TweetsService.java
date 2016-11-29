@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import com.quadi.dao.TweetsDAO;
 import com.quadi.entity.T2p;
 import com.quadi.entity.Tweets;
@@ -14,7 +16,9 @@ import com.quadi.util.tool.UtilTool;
 
 public class TweetsService {
 	private TweetsDAO tweetsDAO;
+	@Resource
 	private Users users;
+	@Resource
 	private Tweets tweets;
 	private List<Twt_RltNumBean> utilBean=new ArrayList<Twt_RltNumBean>();
 	public List<Twt_RltNumBean> getUtilBean() {
@@ -61,5 +65,14 @@ public class TweetsService {
 		}
 		System.out.println("推特数量为="+list.size());
 		return list;
+	}
+	//发送推特
+	public void insertTweets(int uid,String tcontent){
+		Users users=new Users();
+		users.setUid(uid);
+		Tweets tweets=new Tweets();
+		tweets.setUsers(users);
+		tweets.setTcontent(tcontent);
+		tweetsDAO.attachDirty(tweets);
 	}
 }

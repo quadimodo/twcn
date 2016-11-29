@@ -22,13 +22,68 @@
 <link rel="stylesheet" href="css/twitter_core.bundle.css">
 <link rel="stylesheet" href="css/twitter_more_1.bundle.css">
 <link rel="stylesheet" href="css/twitter_more_2.bundle.css">
+<link rel="stylesheet" href="js/uploadify/uploadify.css">
 <script type="text/javascript" src="js/fileupload/jquery-2.1.0.js"></script>
 <script type="text/javascript" src="js/sendTwitter.js"></script>
-<script type="text/javascript" src="js/fileupload/jquery.fileupload.js"></script>
-<script type="text/javascript"
-	src="js/fileupload/jquery.iframe-transport.js"></script>
-<script type="text/javascript"
-	src="js/fileupload/jquery.jquery.ui.widget.js"></script>
+<script type="text/javascript" src="js/uploadify/jquery.uploadify.min.js"></script>
+
+
+<script type="text/javascript">
+$(function () {
+	 $("button#twitter_send").click(function(){
+		
+		
+		$.ajax({
+            cache: true,
+            type: "POST",
+            url:"ajaxsendTweet!sendTweet.action",
+            data:$("#fileupload").serialize(), // 你的formid
+            async: false,
+            error: function(request) {
+                
+            },
+            success: function(data) {
+                
+            }
+        });
+		
+	});
+		/* $('#files').uploadifyUpload('upload');
+		$("#files").uploadify({
+	        uploader      : 'uploadAjax!uploadFile.action',  
+	        method        : 'Post',
+	        height        : 30,
+	        swf           : 'js/uploadify/uploadify.swf',
+	        width         : 200,
+	        fileExt       : '*.png;*.gif;*.jpg;*.bmp;*.jpeg',
+	        fileDesc      : '图片文件(*.png;*.gif;*.jpg;*.bmp;*.jpeg)',
+	        simUploadLimit : 20,	//批量文件最多999
+	        fileObjName   : 'uploadFile',
+	        auto          : false,	//选择文件并确定后自动上传
+	        multi         : true,   //多文件上传
+	        //限制每次同时上传的文件数量 queueSizeLimit : 1,
+	        removeCompleted : false,  // 设置为true上传后自动删除队列
+	        onUploadSuccess   : function(file,data,response){
+	        	//每次每个文件上传成功后
+	        	$("#" + file.id).find(".data").html(" 上传完成");
+	        },
+	        onQueueComplete : function(data){
+	        	//所有文件都上传完成
+	        	$("#successCount").text(data.uploadsSuccessful);
+	        	$("#errorCount").text(data.uploadsErrored);
+	        	$("#info").show();
+	        },
+	        onFallback    : function (){
+	        	alert("需要安装Flash控件");
+	        }
+		}); */
+			
+	
+
+		
+	
+});
+</script>
 </head>
 
 <body>
@@ -270,8 +325,8 @@
 						<img class="top-timeline-tweet-box-user-image avatar size32"
 							src="${users.avatar }" alt="Rainsho">
 
-
-						<form class="t1-form tweet-form" method="post"
+                   <!--  推特表单提交 start -->
+						<form id="fileupload" class="t1-form tweet-form" method="post"
 							target="tweet-post-iframe"
 							action="//upload.twitter.com/i/tweet/create_with_media.iframe"
 							enctype="multipart/form-data" data-poll-composer-rows="3"
@@ -291,29 +346,48 @@
 									<div class="RichEditor-scrollContainer">
 										<!-- 发送推特 -->
 										<div aria-labelledby="tweet-box-home-timeline-label"
-											name="tweet" id="tweet-box-home-timeline"
+											name="tweets.tcontent" id="tweet-box-home-timeline"
 											class="tweet-box rich-editor is-showPlaceholder"
 											contenteditable="true" spellcheck="true" role="textbox"
 											aria-multiline="true" dir="ltr" aria-autocomplete="list"
 											aria-expanded="false" aria-owns="typeahead-dropdown-4">
 
 										</div>
+										<input type="hidden" name="tweets[uid]" value="${users.uid }" >
+										<input type="hidden" id="tcontent"name="tweets[tcontent]" value="">
 
 										<div class="RichEditor-pictographs" aria-hidden="true"></div>
 									</div>
 									<div class="RichEditor-mozillaCursorWorkaround">&nbsp;</div>
 								</div>
+								<div class="TweetBoxAttachments">
 
-
-
+							      
+							      <div class="thumbnail-container">
+							  <div class="thumbnail-wrapper">
+							    <div class="ComposerThumbnails">
+							    <table role="presentation" class="table table-striped"><tbody class="files">
+							    
+							    </tbody></table>
 							</div>
-							<!-- 图片上传 -->
+							    <div class="preview-message">
+							        <button type="button" class="start-tagging js-open-user-select no-users u-borderUserColorLight u-textUserColor" disabled="">
+							          <span class="Icon Icon--me Icon--smallest"></span>
+							          <span class="tagged-users">谁在这张照片里?</span>
+							        </button>
+							    </div>
+							    <div class="js-attribution attribution"></div>
+							    <div class="ComposerVideoInfo u-hidden"></div>
+							  </div>
+							</div>
+							  <div class="photo-tagging-container user-select-container hidden" style='display: none' >
+							</div>
+							<!--                                图片上传                                                                       start                              -->
 							<div class="TweetBoxToolbar fileupload-buttonbar">
 								<div class="TweetBoxExtras tweet-box-extras">
 									<span class="TweetBoxExtras-item TweetBox-mediaPicker">
 										<div class="photo-selector">
-											<button aria-hidden="true" class="btn icon-btn js-tooltip"
-												type="button" tabindex="-1" data-original-title="添加照片或视频">
+											<button aria-hidden="true" class="btn icon-btn js-tooltip" type="button" tabindex="-1" data-original-title="添加照片或视频">
 												<span class="tweet-camera Icon Icon--camera"></span> <span
 													class="text add-photo-label u-hiddenVisually">添加照片或视频</span>
 											</button>
@@ -322,8 +396,9 @@
 													class="file-data">
 												<div class="multi-photo-data-container hidden"></div>
 												<label class="t1-label"> <span
-													class="visuallyhidden">添加照片或视频</span> <input type="file"
-													name="media_empty"
+													class="visuallyhidden">添加照片或视频</span> 
+													<input type="file" id="files"
+													name="files[]"
 													accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
 													multiple="" class="file-input js-tooltip"
 													data-original-title="添加照片或视频" data-delay="150">
@@ -390,7 +465,7 @@
 								<div class="TweetBoxToolbar-tweetButton tweet-button">
 									<span class="spinner"></span> <span class="tweet-counter">140</span>
 									<button id="twitter_send"
-										class="btn primary-btn tweet-action tweet-btn js-tweet-btn"
+										class="btn primary-btn tweet-action tweet-btn js-tweet-btn start"
 										type="button" data-original-title="你也可以按 ctrl-enter">
 										<span class="button-text tweeting-text"> <span
 											class="Icon Icon--tweet"></span> 发推
@@ -403,12 +478,14 @@
 
 								</div>
 							</div>
+							<!--                                图片上传                                                                       start                              -->
 							<div style="position: absolute; visibility: hidden;">
 								<div>
 									<br>
 								</div>
 							</div>
 						</form>
+						<!--  推特表单提交           end -->
 					</div>
 					<!--home-tweet-box-->
 

@@ -207,6 +207,18 @@ public class UsersAction {
 		request.getSession().setAttribute("users", users);
 		return "pwd";
 	}
+	//发送推特
+	public String sendTweet(){
+		Map<String, Object> maplist=commonService();
+		userService=(UserService) maplist.get("userService");
+		tweetsService=(TweetsService) maplist.get("tweetsService");
+		HttpServletRequest request=ServletActionContext.getRequest();
+		 int uid=Integer.parseInt(request.getParameter("tweets[uid]"));
+		 String tcontent=request.getParameter("tweets[tcontent]");
+		 System.out.println(uid+tcontent);
+		tweetsService.insertTweets(uid, tcontent);
+		return null;
+	}
 	//公共方法，提供service
 	public  Map<String, Object> commonService(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
