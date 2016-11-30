@@ -7,7 +7,9 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import com.quadi.dao.T2pDAO;
 import com.quadi.dao.TweetsDAO;
+import com.quadi.entity.Pics;
 import com.quadi.entity.T2p;
 import com.quadi.entity.Tweets;
 import com.quadi.entity.Users;
@@ -20,7 +22,15 @@ public class TweetsService {
 	private Users users;
 	@Resource
 	private Tweets tweets;
+	@Resource
+	private T2pDAO t2pDAO;
 	private List<Twt_RltNumBean> utilBean=new ArrayList<Twt_RltNumBean>();
+	public T2pDAO getT2pDAO() {
+		return t2pDAO;
+	}
+	public void setT2pDAO(T2pDAO t2pDAO) {
+		this.t2pDAO = t2pDAO;
+	}
 	public List<Twt_RltNumBean> getUtilBean() {
 		return utilBean;
 	}
@@ -67,12 +77,23 @@ public class TweetsService {
 		return list;
 	}
 	//·¢ËÍÍÆÌØ
-	public void insertTweets(int uid,String tcontent){
+	public void insertTweets(int uid,String tcontent,String picname){
 		Users users=new Users();
 		users.setUid(uid);
 		Tweets tweets=new Tweets();
 		tweets.setUsers(users);
 		tweets.setTcontent(tcontent);
-		tweetsDAO.attachDirty(tweets);
+		T2p t2p=new T2p();
+		Pics pics=new Pics();
+		pics.setPname(picname);
+		pics.setPpath("/img/"+picname);
+		t2p.setPics(pics);
+		t2p.setTweets(tweets);
+		Set<T2p> set=new HashSet<T2p>();
+		set.add(t2p);
+		pics.setT2ps(set);
+		tweets.setT2ps(set);
+		t2pDAO.save(t2p);
+		//tweetsDAO.attachDirty(tweets);
 	}
 }

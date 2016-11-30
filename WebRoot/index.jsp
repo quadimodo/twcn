@@ -32,8 +32,7 @@
 $(function () {
 	 $("button#twitter_send").click(function(){
 		
-		
-		$.ajax({
+		 $.ajax({
             cache: true,
             type: "POST",
             url:"ajaxsendTweet!sendTweet.action",
@@ -46,9 +45,11 @@ $(function () {
                 
             }
         });
-		
+		 
+		 //$('#files').uploadifyUpload('upload');
+		  
 	});
-		/* $('#files').uploadifyUpload('upload');
+		
 		$("#files").uploadify({
 	        uploader      : 'uploadAjax!uploadFile.action',  
 	        method        : 'Post',
@@ -59,24 +60,24 @@ $(function () {
 	        fileDesc      : '图片文件(*.png;*.gif;*.jpg;*.bmp;*.jpeg)',
 	        simUploadLimit : 20,	//批量文件最多999
 	        fileObjName   : 'uploadFile',
-	        auto          : false,	//选择文件并确定后自动上传
+	        auto          : true,	//选择文件并确定后自动上传
 	        multi         : true,   //多文件上传
 	        //限制每次同时上传的文件数量 queueSizeLimit : 1,
 	        removeCompleted : false,  // 设置为true上传后自动删除队列
 	        onUploadSuccess   : function(file,data,response){
 	        	//每次每个文件上传成功后
-	        	$("#" + file.id).find(".data").html(" 上传完成");
+	        	var obj=JSON.parse(data);
+	        	$("#picsname").val(obj.picname);
+	        	
 	        },
 	        onQueueComplete : function(data){
 	        	//所有文件都上传完成
-	        	$("#successCount").text(data.uploadsSuccessful);
-	        	$("#errorCount").text(data.uploadsErrored);
-	        	$("#info").show();
+	        	
 	        },
 	        onFallback    : function (){
 	        	alert("需要安装Flash控件");
 	        }
-		}); */
+		});
 			
 	
 
@@ -355,6 +356,7 @@ $(function () {
 										</div>
 										<input type="hidden" name="tweets[uid]" value="${users.uid }" >
 										<input type="hidden" id="tcontent"name="tweets[tcontent]" value="">
+										<input type="hidden" id="picsname" name="pics[pname]" value="">
 
 										<div class="RichEditor-pictographs" aria-hidden="true"></div>
 									</div>

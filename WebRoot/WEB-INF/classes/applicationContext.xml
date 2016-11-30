@@ -109,6 +109,9 @@
 		<property name="tweetsDAO">
 			<ref bean="TweetsDAO"/>
 		</property>
+		<property name="t2pDAO">
+			<ref bean="T2pDAO"/>
+		</property>
 	</bean>
 	
 	
@@ -165,6 +168,5 @@
 		</property>
 	</bean>
 	<bean id="uploadAjaxAction" class="com.quadi.action.AjaxAction">
-		
 	</bean>
 </beans>

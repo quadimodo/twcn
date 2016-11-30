@@ -5,8 +5,15 @@ public class Twt_RltNumBean {
 	private long relationNum;
 	private String formattimes;
 	private String pwdStatus;
+	private String picname;
 	
 
+	public String getPicname() {
+		return picname;
+	}
+	public void setPicname(String picname) {
+		this.picname = picname;
+	}
 	public String getPwdStatus() {
 		return pwdStatus;
 	}

@@ -2,12 +2,18 @@ package com.quadi.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import  javax.servlet.jsp.PageContext;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,6 +23,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpRequest;
 
+import com.jspsmart.upload.File;
+import com.jspsmart.upload.Files;
+import com.jspsmart.upload.Request;
+import com.jspsmart.upload.SmartUpload;
+import com.jspsmart.upload.SmartUploadException;
 import com.opensymphony.xwork2.ActionContext;
 import com.quadi.entity.Relationships;
 import com.quadi.entity.Tweets;
@@ -38,6 +49,13 @@ public class UsersAction {
 	private List<Tweets> tweetsList;
 	private JSONArray jsonArray;
 	private String oldPwd;
+	private ServletConfig servletConfig;
+	public ServletConfig getServletConfig() {
+		return servletConfig;
+	}
+	public void setServletConfig(ServletConfig servletConfig) {
+		this.servletConfig = servletConfig;
+	}
 	private Twt_RltNumBean twt_RltNumBean=new Twt_RltNumBean();
 
 	public String getOldPwd() {
@@ -215,10 +233,14 @@ public class UsersAction {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		 int uid=Integer.parseInt(request.getParameter("tweets[uid]"));
 		 String tcontent=request.getParameter("tweets[tcontent]");
+		 String picname=request.getParameter("pics[pname]");
+		 
 		 System.out.println(uid+tcontent);
-		tweetsService.insertTweets(uid, tcontent);
+		tweetsService.insertTweets(uid, tcontent,picname);
 		return null;
 	}
+	
+	
 	//公共方法，提供service
 	public  Map<String, Object> commonService(){
 		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");

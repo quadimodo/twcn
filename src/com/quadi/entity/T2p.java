@@ -1,5 +1,6 @@
 package com.quadi.entity;
 
+import javax.annotation.Resource;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,11 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+
 /**
  * T2p entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "t2p", catalog = "twcn")
+@DynamicInsert(true)
 public class T2p implements java.io.Serializable {
 
 	// Fields
@@ -46,7 +50,7 @@ public class T2p implements java.io.Serializable {
 		this.tpid = tpid;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tid", nullable = false)
 	public Tweets getTweets() {
 		return this.tweets;
